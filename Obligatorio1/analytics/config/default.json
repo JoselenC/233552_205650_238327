@@ -1,0 +1,7 @@
+{
+    "repositoryAnalytics": {
+        "url": "mongodb://localhost:27017/analytics",
+        "database": "analytics"
+    },
+    "port":6067
+}
