@@ -7,7 +7,7 @@ module.exports = class PersonNotifyRepository {
         this.repository = new Repository();
     }
 
-    async findAll(limit, offset) {
+    async getAll(limit, offset) {
         var query = await PersonNotify.find();
         if (limit) {
             query.limit(limit);
@@ -22,11 +22,11 @@ module.exports = class PersonNotifyRepository {
     async save(data) {
         let existing = await PersonNotify.findOne({ Email: data.Email });
         if (existing == null) {
-            data.URL= "aca iria URL única";
+            data.URL= "aca iria URL única"; //TODO
             let personNotify = await PersonNotify.create(data);
             return personNotify.toObject();
         } else {
-            throw new Error("That person to notify already exists");
+            throw new Error("That person to notify already exists in the system");
         }
     }
 
