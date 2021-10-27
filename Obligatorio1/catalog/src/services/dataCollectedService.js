@@ -8,7 +8,7 @@ module.exports = class PropertyObservedService {
     constructor() {
         this.propertyObservedRepository = new PropertyObservedRepository();
         this.rankService = new RankService()
-        this.mailingService = new MailingService()
+        this.analyticsService = new AnalyticsService()
         this.sensorService = new SensorService()
         this.dataCollectedService = new DataCollectedService()
     }
@@ -16,11 +16,11 @@ module.exports = class PropertyObservedService {
         return await this.propertyObservedRepository.findAll();
     }
 
-    asyn sendMail(){
+    async sendMail(){
         var email = '';
         var password = '';
         var service = '';
-        this.mailingService.sendMail(email, password, service);
+        this.analyticsService.sendMail(email, password, service);
     }
 
     async save(data) {
@@ -32,7 +32,7 @@ module.exports = class PropertyObservedService {
                 return await this.propertyObservedRepository.save(data);
         }
         else {
-            throw new console.error('Sensor' data.sensor 'not registered in the system');
+            throw new console.error('Sensor' + data.sensor + 'not registered in the system');
         }
 
     }
