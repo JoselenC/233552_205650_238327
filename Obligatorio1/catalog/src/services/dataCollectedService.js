@@ -7,23 +7,14 @@ const DataCollectedService = require('../services/dataCollectedService');
 module.exports = class PropertyObservedService {
     constructor() {
         this.propertyObservedRepository = new PropertyObservedRepository();
-        this.rankService = new RankService()
         this.analyticsService = new AnalyticsService()
-        this.sensorService = new SensorService()
-        this.dataCollectedService = new DataCollectedService()
     }
     async findAll() {
         return await this.propertyObservedRepository.findAll();
     }
 
-    async sendMail(){
-        var email = '';
-        var password = '';
-        var service = '';
-        this.analyticsService.sendMail(email, password, service);
-    }
-
     async save(data) {
+<<<<<<< Updated upstream
         if (this.sensorService.exist(data.sensor)) {
             const rank = this.rankService.findByProperty(data.propertyObserved);
             if (data.value > rank.finalValue || data.value < rank.initialValue) 
@@ -36,6 +27,12 @@ module.exports = class PropertyObservedService {
         }
     }
     
+=======
+
+        return await this.propertyObservedRepository.save(data);
+    }
+
+>>>>>>> Stashed changes
     async findByName(name) {
         return await this.propertyObservedRepository.findByName(name);
     }
