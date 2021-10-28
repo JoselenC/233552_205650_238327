@@ -13,4 +13,8 @@ module.exports = class SensorService {
     async findByName(name) {
         return await this.sensorRepository.findByName(name);
     }
+
+    async exist(sensor) {
+        return await this.sensorRepository.findByName(sensor.name) != null            
+    }
 }

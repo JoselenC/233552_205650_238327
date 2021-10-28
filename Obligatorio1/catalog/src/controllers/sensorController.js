@@ -5,7 +5,7 @@ module.exports = class SensorController {
         this.catalogService = new CatalogService();
     }
 
-    async findAll (ctx, next) {
+    async getAll (ctx, next) {
         let list = (await this.catalogService.findAll()) || [];
         ctx.body = { data: list };
         await next();

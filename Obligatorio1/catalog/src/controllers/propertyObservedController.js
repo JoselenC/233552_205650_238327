@@ -5,7 +5,7 @@ module.exports = class SensorController {
         this.propertyObservedService = new PropertyObservedService();
     }
 
-    async findAll (ctx, next) {
+    async getAll (ctx, next) {
         let list = (await this.propertyObservedService.findAll()) || [];
         ctx.body = {data: list };
         await next();

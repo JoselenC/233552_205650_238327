@@ -34,8 +34,8 @@ module.exports = class PropertyObservedService {
         else {
             throw new console.error('Sensor' + data.sensor + 'not registered in the system');
         }
-
     }
+    
     async findByName(name) {
         return await this.propertyObservedRepository.findByName(name);
     }
