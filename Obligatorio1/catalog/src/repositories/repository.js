@@ -35,9 +35,9 @@ module.exports = class Repository {
         module.exports.DataCollected = DataCollected
 
         Sensor.belongsTo(Sensor);
-        Sensor.hasMany(PropertyObserved, { as: 'proprtiesObserved' });
+        Sensor.hasMany(PropertyObserved, { as: 'propertiesObserved' });
         DataCollected.belongsTo(DataCollected);
-        DataCollected.hasOne(PropertyObserved, { as: 'proprtyObserved' });
+        DataCollected.hasOne(PropertyObserved, { as: 'propertiesObserved' });
         DataCollected.hasOne(Sensor, { as: 'sensor' });
 
         return this.connection.sync();
