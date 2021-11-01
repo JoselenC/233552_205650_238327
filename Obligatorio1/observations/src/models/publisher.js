@@ -3,14 +3,14 @@ const config = require("config");
 
 module.exports = class Publisher {
   constructor() {
-    this.pubReservation = new queue("PostDataCollected", {
+    this.pubDataCollected = new queue("PostDataCollected", {
       removeOnSuccess: true,
       redis: config.get("redis"),
     });
   }
 
   async publishSaveDataCollected(data) {
-    const addData = await this.pubReservation.add({
+    const addData = await this.pubDataCollected.add({
       type: "save",
       data: data,
     });
