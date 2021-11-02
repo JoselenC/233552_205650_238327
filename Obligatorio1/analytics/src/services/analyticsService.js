@@ -1,20 +1,22 @@
 const PersonNotifyRepository = require("../repositories/personNotifyRepository");
-
-module.exports= class AnalyticsService{
+const rankService = require('../../../catalog/src/services/rankService');
+const RankService = require("../../../catalog/src/services/rankService");
+module.exports = class AnalyticsService {
 
     constructor() {
-    this.personNotifyRepository = new PersonNotifyRepository();    
+        this.personNotifyRepository = new PersonNotifyRepository();
+        this.rankService = new RankService()
     }
 
     async save(data) {
-    return await this.personNotifyRepository.save(data);
+        return await this.personNotifyRepository.save(data);
     }
 
     async findByEmail(email) {
         return await this.personNotifyRepository.findByEmail(email);
-    }   
+    }
 
-    createTransporter(user, pass, service) {
+    async createTransporter(user, pass, service) {
         var transporter = nodemailer.createTransport({
             service: service,
             auth: {
@@ -25,18 +27,18 @@ module.exports= class AnalyticsService{
         return transporter
     }
 
-    sendMail(emailFrom, pass, service) {
+    async sendMail(emailFrom, pass, service) {
         var transporter = this.createTransporter(eailFrom, pass, service)
-        
+
         this.personNotifyRepository.forEach(person => {
-            
+
             var mailOptions = {
                 from: emailFrom,
                 to: person.emailTo,
                 subject: 'Asunto Del Correo',
                 text: mensaje
             };
-    
+
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log(error);
@@ -44,7 +46,19 @@ module.exports= class AnalyticsService{
                     console.log('Email enviado: ' + info.response);
                 }
             });
-        });      
+        });
+    }
+
+    async isValidData(data) {
+        const rank = this.rankService.findByProperty(data.propertyObserved);
+        if (data.value > rank.finalValue || data.value < rank.initialValue) {
+            await sendMail();
+            return false;
+        }
+        else {
+            return true;
+        }
+
     }
 
 }
