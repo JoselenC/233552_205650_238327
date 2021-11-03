@@ -18,6 +18,7 @@ module.exports = class DataCollectedRepository {
         }
         else{
             //la lectura no pertenece aninguna propiedad observable del sensor indicado
+            throw new Error("That reading does not belong to any observable property of said sensor.");
         }
         return dataCollected;
     }
@@ -30,4 +31,13 @@ module.exports = class DataCollectedRepository {
             return null;
         }
     }
+
+    // async getESN() {
+    //     try {
+    //         let dataCollected = await this.dataCollectedRepository.findOne({ Name: name,include: this.relations});
+    //         return dataCollected;
+    //     } catch (err) {
+    //         return null;
+    //     }
+    // }
 }
