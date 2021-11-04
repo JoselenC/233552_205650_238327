@@ -22,6 +22,10 @@ router.get("/gateway/consumer/:name", (ctx, next) =>
     exporterController.getConsumersByName(ctx, next)
 );
 
+router.get("/gateway/data", (ctx, next) =>
+    exporterController.getData()
+);
+
 router.get("/gateway/analytics/:email", (ctx, next) =>
     analyticsController.getPersonByEmail(ctx, next)
 );
