@@ -2,7 +2,7 @@ const Config = require('config');
 const Sequelize = require('sequelize');
 const mysql = require('mysql2/promise');
 const SensorModel = require('../../../catalog/src/models/sensor');
-const DataCollectedModel = require('../models/dataCollected');
+const ObservationModel = require('../models/observation');
 
 
 module.exports = class Repository {
@@ -27,10 +27,10 @@ module.exports = class Repository {
         module.exports.PropertyObserved = PropertyObserved
         const Sensor = SensorModel(this.connection, Sequelize);
         module.exports.Sensor = Sensor
-        const DataCollected = DataCollectedModel(this.connection, Sequelize);
-        module.exports.DataCollected = DataCollected
-        DataCollected.belongsTo(DataCollected);
-        DataCollected.hasOne(Sensor, { as: 'sensor' });
+        const Observation = ObservationModel(this.connection, Sequelize);
+        module.exports.Observation = Observation
+        Observation.belongsTo(Observation);
+        Observation.hasOne(Sensor, { as: 'sensor' });
         return this.connection.sync();
     }
 

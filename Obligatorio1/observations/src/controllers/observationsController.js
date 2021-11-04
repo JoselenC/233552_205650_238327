@@ -1,14 +1,14 @@
-const DataCollectedService = require("../services/dataCollectedService");
+const ObservationService = require("../services/observationService");
 
 module.exports = class GatewayController {
   constructor() {
-    this.dataCollectedService = new DataCollectedService();
+    this.observationService = new ObservationService();
   }
 
-  async saveDataCollected(ctx, next) {
+  async saveObservation(ctx, next) {
     try {
       let data = ctx.request.body;
-      let observation = await this.dataCollectedService.save(data);
+      let observation = await this.observationService.save(data);
       ctx.body = observation;
       await next();
     } catch (err) {

@@ -47,7 +47,7 @@ router.get("/gateway/sensor", (ctx, next) =>
 );
 
 router.post("/gateway/observation", (ctx, next) =>
-    observationsController.saveDataCollected(ctx, next)
+    observationsController.saveObservation(ctx, next)
 );
 
 module.exports = router;
