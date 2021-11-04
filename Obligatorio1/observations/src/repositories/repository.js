@@ -29,8 +29,6 @@ module.exports = class Repository {
         module.exports.Sensor = Sensor
         const Observation = ObservationModel(this.connection, Sequelize);
         module.exports.Observation = Observation
-        Observation.belongsTo(Observation);
-        Observation.hasOne(Sensor, { as: 'sensor' });
         return this.connection.sync();
     }
 

@@ -30,9 +30,6 @@ router.get("/gateway/property", (ctx, next) =>
     propertyObservedController.getAll(ctx, next)
 );
 
-router.post("/gateway/analytics", (ctx, next) =>
-    analyticsController.saveAnalytics(ctx, next)
-);
 
 router.post("/gateway/property", (ctx, next) =>
     propertyObservedController.save(ctx, next)
