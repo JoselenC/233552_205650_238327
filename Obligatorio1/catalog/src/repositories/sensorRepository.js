@@ -17,9 +17,9 @@ module.exports = class SensorRepository {
         return sensor;
     }
 
-    async findByName(name) {
+    async findByEsn(esn) {
         try {
-            let sensor = await this.sensorRepository.findOne({ Name: name, include: this.relations });
+            let sensor = await this.sensorRepository.findOne({ Esn: esn, include: this.relations });
             return sensor;
         } catch (err) {
             return null;
