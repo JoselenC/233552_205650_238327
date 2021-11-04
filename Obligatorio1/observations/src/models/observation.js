@@ -9,7 +9,11 @@ const Observation = (schema, types) => {
         },
         name: Sequelize.STRING,
         unit: Sequelize.STRING,
-        value: Sequelize.INTEGER
+        value: Sequelize.INTEGER,
+        standarizedUnit:  Sequelize.INTEGER,
+        standarizedData:  Sequelize.INTEGER,
+        time: Sequelize.INTEGER,
+        ESN: { type: types.STRING, allowNull: false, validate: { max: 16 } }
     });
 };
 
