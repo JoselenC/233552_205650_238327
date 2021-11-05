@@ -10,7 +10,7 @@ module.exports = class GatewayController {
       let data = ctx.request.body;
       let esn = ctx.params.esn;
       if (esn == null)
-        esn = ctx.request.header;
+        esn = ctx.request.header.esn;
       if (esn == null)
         throw new Error("Invalid empty esn");
       let observation = await this.observationService.save(data, esn);
