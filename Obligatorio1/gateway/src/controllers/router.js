@@ -55,6 +55,4 @@ router.post("/gateway/observation/:esn", (ctx, next) =>
     observationsController.saveObservation(ctx, next)
 );
 
-
-
 module.exports = router;

@@ -34,7 +34,7 @@
     "repoObservation": {
         "database": "observationDB",
         "user": "root",
-        "password": "secret",
+        "password": "root",
         "options": {
             "host": "localhost",
             "dialect": "mysql",

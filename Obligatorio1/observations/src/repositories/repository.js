@@ -1,7 +1,6 @@
 const Config = require('config');
 const Sequelize = require('sequelize');
 const mysql = require('mysql2/promise');
-const SensorModel = require('../../../catalog/src/models/sensor');
 const ObservationModel = require('../models/observation');
 
 
@@ -22,11 +21,7 @@ module.exports = class Repository {
     }
 
 
-    static async loadModels() {
-        const PropertyObserved = PropertyObservedModel(this.connection, Sequelize);
-        module.exports.PropertyObserved = PropertyObserved
-        const Sensor = SensorModel(this.connection, Sequelize);
-        module.exports.Sensor = Sensor
+    static async loadModels() {      
         const Observation = ObservationModel(this.connection, Sequelize);
         module.exports.Observation = Observation
         return this.connection.sync();

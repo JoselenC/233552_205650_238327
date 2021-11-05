@@ -1,15 +1,15 @@
 const ConsumerRepository = require("../repositories/consumerRepository");
-const DataCollectedService = require("../../../observations/src/services/dataCollectedService")
+const ObservationService = require("../../../observations/src/services/observationService")
 
 module.exports = class ExporterService {
 
     constructor() {
         this.consumerRepository = new ConsumerRepository();
-        this.dataCollectedService = new DataCollectedService();
+        this.observationService = new ObservationService();
     }
 
     async getData(){
-        return await this.dataCollectedService.findAll();
+        return await this.observationService.findAll();
     }
 
     async saveConsumer(data) {

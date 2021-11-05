@@ -14,6 +14,16 @@ module.exports = class SensorService {
         return await this.sensorRepository.findByEsn(esn);
     }
 
+    async existSensorProperty(sensor, propertyName) {
+        var exist=false;
+        sensor.propertiesObserved.forEach(element => {
+            if (element.name == propertyName){
+               exist= true;          
+            }
+        });
+        return exist;
+    }
+
     async exist(sensor) {
         return await this.sensorRepository.findByEsn(sensor.esn) != null            
     }
