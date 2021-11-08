@@ -1,19 +1,20 @@
 const ObservationRepository = require('../repositories/observationRepository');
-const Publisher = require('../models/publisher');
 
 module.exports = class ObservationService {
     constructor() {
-        this.observationRepository = new ObservationRepository();
-        this.publisher = new Publisher();
+        this.observationRepository = new ObservationRepository();       
     }
 
     async findAll() {
         return await this.observationRepository.findAll();
     }
 
-    async save(data,esn) {
-        this.publisher.publishSaveObservation(data)
-        return await this.observationRepository.save(data,esn);
+    async save(data) {      
+        return await this.observationRepository.save(data);
+    }
+
+    async sensorProperty(esn, propertyName) {      
+        return await this.observationRepository.sensorProperty(esn, propertyName);
     }
 
     async findByName(name) {

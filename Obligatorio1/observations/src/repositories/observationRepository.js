@@ -8,10 +8,19 @@ module.exports = class ObservationRepository {
     }
 
     async findAll() {
-        let observation = await this.observationRepository.findAll(query);
+        let observation = await this.observationRepository.findAll();
         return observation;
     }
 
+
+    async sensorProperty(esn, propertyName) {
+        try {
+         return await this.sensorService.sensorProperty(esn, propertyName)
+        }
+        catch (err) {
+            throw new Error("Property does not exist");
+        }
+    }
 
     async existProperty(esn, propertyName) {
         try {
@@ -24,9 +33,8 @@ module.exports = class ObservationRepository {
         }
     }
 
-    async save(data, esn) {
-        if (await this.existProperty(esn, data.name)) {
-            data.ESN = esn;
+    async save(data) {
+        if (await this.existProperty(data.ESN, data.name)) {
             return await this.observationRepository.create(data);
         }
         else

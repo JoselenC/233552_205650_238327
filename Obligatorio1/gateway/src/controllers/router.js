@@ -30,6 +30,10 @@ router.get("/gateway/analytics/:email", (ctx, next) =>
     analyticsController.getPersonByEmail(ctx, next)
 );
 
+router.get("/gateway/observation", (ctx, next) =>
+    observationsController.getAll(ctx, next)
+);
+
 router.get("/gateway/property", (ctx, next) =>
     propertyObservedController.getAll(ctx, next)
 );
