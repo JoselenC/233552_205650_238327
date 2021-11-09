@@ -9,7 +9,8 @@ const DataCollected = (schema, types) => {
         },
         name: Sequelize.STRING,
         unit: Sequelize.STRING,
-        value: Sequelize.INTEGER
+        value: Sequelize.INTEGER,
+        createdAt: Sequelize.DATE
     });
 };
 

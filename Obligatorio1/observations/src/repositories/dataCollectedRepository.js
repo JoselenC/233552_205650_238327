@@ -1,4 +1,5 @@
 const Repository = require('../../../catalog/src/repositories/repository');
+const { Op } = require("sequelize");
 
 module.exports = class DataCollectedRepository {
     constructor() {
@@ -27,6 +28,21 @@ module.exports = class DataCollectedRepository {
             let dataCollected = await this.dataCollectedRepository.findOne({ Name: name,include: this.relations});
             return dataCollected;
         } catch (err) {
+            return null;
+        }
+    }
+
+async findObservedPropertiesByDateAndSensor(startDate, endDate, observedProperty, sensor){
+        try {
+            let dataCollected = await this.dataCollectedRepository.findAll({where: {
+                [Op.and]: [/*{propertiesObserved: observedProperty}, */{Sensor: sensor},
+                {createdAt: {
+                    [Op.between]: [startDate, endDate]
+                }}]
+            }})
+            return dataCollected;
+        }
+        catch (err){
             return null;
         }
     }

@@ -31,6 +31,10 @@ router.post("/gateway/analytics", (ctx, next) =>
     analyticsController.saveAnalytics(ctx, next)
 );
 
+router.get("/gateway/analytics/:startDate/:endDate/:observedProperty/:sensor", (ctx, next) =>
+    analyticsController.calculateAverageValues(ctx, next)
+);
+
 router.post("/gateway/property", (ctx, next) =>
     propertyObservedController.save(ctx, next)
 );
