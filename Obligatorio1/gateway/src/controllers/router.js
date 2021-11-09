@@ -40,7 +40,7 @@ router.get("/gateway/property", (ctx, next) =>
 
 
 router.post("/gateway/property", (ctx, next) =>
-    propertyObservedController.save(ctx, next)
+    observationsController.save(ctx, next)
 );
 
 router.post("/gateway/sensor", (ctx, next) =>
@@ -51,12 +51,19 @@ router.get("/gateway/sensor", (ctx, next) =>
     sensorController.getAll(ctx, next)
 );
 
-router.post("/gateway/observation", (ctx, next) =>
-    observationsController.saveObservation(ctx, next)
-);
+router.post("/gateway/observation", async (ctx, next) => {
+    await observationsController.saveObservation(ctx, next)
+        .then((value) => {
+            ctx.body = { data: value }
+        })
+});
 
-router.post("/gateway/observation/:esn", (ctx, next) =>
-    observationsController.saveObservation(ctx, next)
-);
+router.post("/gateway/observation/:esn", async (ctx, next) => {
+    await observationsController.saveObservation(ctx, next)
+        .then((value) => {
+            console.log(value)
+            ctx.body = { data: value }
+        })
+});
 
 module.exports = router;

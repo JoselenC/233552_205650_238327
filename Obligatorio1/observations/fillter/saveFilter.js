@@ -2,9 +2,11 @@ const ObservationService = require("../src/services/observationService");
 var observarionService = new ObservationService();
 
 const saveFilter = async (input, next) => {
-  input.value=0
-  console.log(input)
-  await observarionService.save(input);
+  try {
+    await observarionService.save(input);
+  } catch (err) {
+    throw new Error(err.message)
+  }
 }
 
 module.exports = {

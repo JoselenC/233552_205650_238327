@@ -3,8 +3,8 @@ const Pipeline = require('../../pipeline/pipeline');
 const pipeline = new Pipeline();
 
 var convertFilter = async (input, next) => {
- await require('../../fillter/convertFilter').convertFilter(input, next);
- next(null, input);
+  await require('../../fillter/convertFilter').convertFilter(input, next);
+  next(null, input);
 };
 var analyzeFilter = async (input, next) => {
   await require('../../fillter/analyzeFilter').analyzeFilter(input, next);
@@ -21,32 +21,29 @@ module.exports = class GatewayController {
   }
 
   async saveObservation(ctx, next) {
+
     try {
       let esn = ctx.params.esn;
       if (esn == null)
         esn = ctx.request.header.esn;
       if (esn == null)
         throw new Error("Invalid empty esn");
-
       let data = ctx.request.body;
       data.ESN = esn;
-      pipeline.use(saveFilter);
       pipeline.use(convertFilter);
-      
+      pipeline.use(saveFilter);
       pipeline.run(data)
-      pipeline.on('error', (err) => {
-        console.log(`The error is ${err}`);
-    });
-    pipeline.on('end', (result) => {
-      console.log(result)   
-        ctx.body = result
-    });
+      return await new Promise( (resolve, reject) => {
+        pipeline.on('end', (result) => {
+          resolve(result)
+        })    
+      })
       
-      await next();
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
     }
+
   }
 
   async getAll(ctx, next) {
