@@ -23,13 +23,16 @@ module.exports = class GatewayController {
   async saveObservation(ctx, next) {
 
     try {
-      let esn = ctx.params.esn;
-      if (esn == null)
+      let esn = ""
+      if (ctx.params.esn != "")
+      esn = ctx.params.esn
+      else if (ctx.request.header.esn != "")
         esn = ctx.request.header.esn;
-      if (esn == null)
+      else if (esn == null)
         throw new Error("Invalid empty esn");
       let data = ctx.request.body;
       data.ESN = esn;
+      console.log(data)
       pipeline.use(convertFilter);
       pipeline.use(saveFilter);
       pipeline.run(data)
@@ -43,7 +46,7 @@ module.exports = class GatewayController {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
     }
-
+    await next();
   }
 
   async getAll(ctx, next) {

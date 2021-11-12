@@ -13,7 +13,7 @@ module.exports = class ObservationService {
         return await this.observationRepository.save(data);
     }
 
-    async sensorProperty(esn, propertyName) {      
+    async sensorProperty(esn, propertyName) {   
         return await this.observationRepository.sensorProperty(esn, propertyName);
     }
 

@@ -5,13 +5,11 @@ const formula = new Formula();
 
 const convertFilter = async (input, next) => {
   try {
-    console.log(input)
     const unit = input.unit;
     const name = input.name;
     const esn = input.ESN;
     const property = await observarionService.sensorProperty(esn, name);
     input.standarizedUnit = property.unit;
-    console.log (await formula.transform(input.value,property.unit,input.unit))
     input.standarizedData= await formula.transform(input.value,property.unit,input.unit)
   } catch (err) {
     throw new Error(err.message)

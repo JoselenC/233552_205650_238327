@@ -61,7 +61,6 @@ router.post("/gateway/observation", async (ctx, next) => {
 router.post("/gateway/observation/:esn", async (ctx, next) => {
     await observationsController.saveObservation(ctx, next)
         .then((value) => {
-            console.log(value)
             ctx.body = { data: value }
         })
 });
