@@ -9,7 +9,7 @@ module.exports = class ObservationService {
         return await this.observationRepository.findAll();
     }
 
-    async save(data) {      
+    async save(data) {   
         return await this.observationRepository.save(data);
     }
 

@@ -11,7 +11,7 @@ const Observation = (schema, types) => {
         unit: Sequelize.STRING,
         value: Sequelize.INTEGER,
         standarizedUnit:  Sequelize.STRING,
-        standarizedData:  Sequelize.INTEGER,
+        standarizedData:  Sequelize.DECIMAL(10,5),
         time: Sequelize.INTEGER,
         ESN: Sequelize.STRING
     });

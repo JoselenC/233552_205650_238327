@@ -9,8 +9,18 @@ const convertFilter = async (input, next) => {
     const name = input.name;
     const esn = input.ESN;
     const property = await observarionService.sensorProperty(esn, name);
-    input.standarizedUnit = property.unit;
-    input.standarizedData= await formula.transform(input.value,property.unit,input.unit)
+    if (property != null) {
+      input.standarizedUnit = property.unit;
+      await formula.transform(input.value, property.unit, input.unit)
+        .then((value) => {
+          input.standarizedData=value
+        }).catch(function () {
+            console.log("Promise Rejected");
+       })
+    }
+    else {
+      throw new Error("That reading does not belong to any observable property of said sensor.")
+    }
   } catch (err) {
     throw new Error(err.message)
   }

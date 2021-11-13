@@ -1,7 +1,9 @@
 const Publisher = require('../src/models/publisher');
 const publisher = new Publisher();
 
-const analyzeFilter = async (input, next) => await publisher.publishSaveObservation(input);
+const analyzeFilter = async (input, next) => {
+  await publisher.publishSaveObservation(input);
+}
 
 module.exports = {
     analyzeFilter,

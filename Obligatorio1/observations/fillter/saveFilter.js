@@ -7,6 +7,7 @@ const saveFilter = async (input, next) => {
   } catch (err) {
     throw new Error(err.message)
   }
+
 }
 
 module.exports = {

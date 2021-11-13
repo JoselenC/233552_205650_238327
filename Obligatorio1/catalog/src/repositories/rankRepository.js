@@ -1,7 +1,9 @@
 const Repository = require('./repository');
+const PropertyObservedRepository = require("./propertyObservedRepository")
 
 module.exports = class RankRepository {
     constructor() {
+        this.propertyObservedRepository= new PropertyObservedRepository()
         this.rankRepository = Repository.Rank;
         this.relations = ['propertiesObserved'];
     }
@@ -25,9 +27,11 @@ module.exports = class RankRepository {
         }
     }
 
-    async findByProperty(property) {
+    async findByProperty(propertyName) {
         try {
-            let rank = await this.rankRepository.findOne({ Property: property, include: this.relations });
+            let property = await this.propertyObservedRepository.findByName(propertyName)
+            let rank = await this.rankRepository.findOne({ Property: property.dataValues, 
+                include: this.relations });
             return rank;
         } catch (err) {
             return null;

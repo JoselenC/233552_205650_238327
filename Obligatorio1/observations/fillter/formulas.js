@@ -15,7 +15,6 @@ module.exports = class Formula {
             resolve(element.value)
           }
         });
-      throw new Error();
     })
   }
 
