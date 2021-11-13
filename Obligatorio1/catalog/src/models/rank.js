@@ -7,8 +7,8 @@ const Rank = (schema, types) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        initialValue: Sequelize.INTEGER,
-        finalValue: Sequelize.INTEGER
+        initialValue: Sequelize.DECIMAL(10,5),
+        finalValue: Sequelize.DECIMAL(10,5)
     });
 };
 

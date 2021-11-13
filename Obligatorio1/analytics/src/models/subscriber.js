@@ -12,10 +12,10 @@ module.exports = class Subscriber {
   }
 
   initSubscriber() {
-    this.subObservation.process((observation, done) => {
+    this.subObservation.process(async (observation, done) => {
       try {
         if (observation.data.type == "save") {
-          const result = this.analyticsService.isValidData(observation.data.data)
+          const result = await this.analyticsService.isValidData(observation.data.data)
           done(null, result);
         }
       } catch (err) {
