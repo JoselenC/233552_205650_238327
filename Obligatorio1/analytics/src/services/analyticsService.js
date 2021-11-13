@@ -19,11 +19,9 @@ module.exports = class AnalyticsService {
     }
 
     async sendMail(message) {
-        console.log("==================================")
         let persons = await this.personNotifyRepository.getAll();
         if (persons != null) {
             persons.forEach(person => {
-                console.log(person.Email)
                 var mailOptions = {
                     from: "obligatorioarqusoft@gmail.com",
                     to: person.Email,
