@@ -1,10 +1,7 @@
 const Config = require('config');
 const Sequelize = require('sequelize');
 const mysql = require('mysql2/promise');
-const SensorModel = require('../models/sensor');
-const PropertyObservedModel = require('../models/propertyObserved');
-const RankModel = require('../models/rank');
-const ObservationModel = require('../../../observations/src/models/observation');
+const ObservationModel = require('../models/observation');
 
 
 module.exports = class Repository {
@@ -13,7 +10,7 @@ module.exports = class Repository {
     }
 
     static async connect() {
-        const databaseConfig = Config.get("repomysql");
+        const databaseConfig = Config.get("repoObservation");
         this.connection = new Sequelize(databaseConfig.database, databaseConfig.user,
             databaseConfig.password, databaseConfig.options);
         const connection = await mysql.createConnection({ host:databaseConfig.host, port:databaseConfig.port
@@ -24,19 +21,9 @@ module.exports = class Repository {
     }
 
 
-    static async loadModels() {
-        const PropertyObserved = PropertyObservedModel(this.connection, Sequelize);
-        module.exports.PropertyObserved = PropertyObserved
-        const Sensor = SensorModel(this.connection, Sequelize);
-        module.exports.Sensor = Sensor
-        const Rank = RankModel(this.connection, Sequelize);
-        module.exports.Rank = Rank
+    static async loadModels() {      
         const Observation = ObservationModel(this.connection, Sequelize);
         module.exports.Observation = Observation
-        Sensor.belongsTo(Sensor);
-        Sensor.hasMany(PropertyObserved, { as: 'propertiesObserved' });
-        Rank.belongsTo(Rank);
-        Rank.hasMany(PropertyObserved, { as: 'propertiesObserved' });
         return this.connection.sync();
     }
 

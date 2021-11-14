@@ -10,11 +10,32 @@ module.exports = class SensorService {
     async save(data) {
         return await this.sensorRepository.save(data);
     }
-    async findByName(name) {
-        return await this.sensorRepository.findByName(name);
+    async findByEsn(esn) {
+        return await this.sensorRepository.findByEsn(esn);
+    }
+
+    async existSensorProperty(sensor, propertyName) {
+        var exist = false;
+        sensor.propertiesObserved.forEach(element => {
+            if (element.name == propertyName) {
+                exist = true;
+            }
+        });
+        return exist;
+    }
+
+    async sensorProperty(esn, propertyName) {
+        let property= null;
+        var sensor = await this.findByEsn(esn);
+        sensor.propertiesObserved.forEach(element => {
+            if (element.name == propertyName) {
+                property= element;              
+            }
+        });
+        return property;
     }
 
     async exist(sensor) {
-        return await this.sensorRepository.findByName(sensor.name) != null            
+        return await this.sensorRepository.findByEsn(sensor.esn) != null
     }
 }

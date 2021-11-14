@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "mongoose": "^5.12.14",
-    "config": "^3.3.6"
+    "config": "^3.3.6",
+    "jsonwebtoken": "^8.5.1",
+    "winston": "^3.3.3",
+    "md5": "^2.3.0",
+    "redis": "^3.1.2",
+    "redis-server": "^1.2.2"
   }
 }
