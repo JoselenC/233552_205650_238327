@@ -35,7 +35,7 @@ module.exports = class DataCollectedRepository {
 async findObservedPropertiesByDateAndSensor(startDate, endDate, observedProperty, sensor){
         try {
             let dataCollected = await this.dataCollectedRepository.findAll({where: {
-                [Op.and]: [/*{propertiesObserved: observedProperty}, */{Sensor: sensor},
+                [Op.and]: [/*{propertiesObserved: observedProperty}, */{sensorId: sensor},
                 {createdAt: {
                     [Op.between]: [startDate, endDate]
                 }}]
