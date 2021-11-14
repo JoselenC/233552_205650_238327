@@ -5,17 +5,17 @@ const AnalyticsService = require("../services/analyticsService");
 module.exports = class Subscriber {
   constructor() {
     this.analyticsService = new AnalyticsService()
-    this.subDataCollected = new queue("PostDataCollected", {
+    this.subObservation = new queue("PostObservation", {
       removeOnSuccess: true,
       redis: config.get("redis"),
     });
   }
 
   initSubscriber() {
-    this.subDataCollected.process((dataCollected, done) => {
+    this.subObservation.process(async (observation, done) => {
       try {
-        if (dataCollected.data.type == "save") {
-          const result = this.analyticsService.isValidData(dataCollected.data.data)
+        if (observation.data.type == "save") {
+          const result = await this.analyticsService.isValidData(observation.data.data)
           done(null, result);
         }
       } catch (err) {

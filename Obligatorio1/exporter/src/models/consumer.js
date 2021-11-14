@@ -3,7 +3,7 @@ const Consumer = mongoose.model(
   "consumers",
   mongoose.Schema({
     Name: String,
-    Propsito: String,
+    Proposito: String,
     FechaRegistro: String,
     URL: String
   })

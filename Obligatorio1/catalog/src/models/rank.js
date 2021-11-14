@@ -7,9 +7,10 @@ const Rank = (schema, types) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        initialValue: Sequelize.INTEGER,
-        finalValue: Sequelize.INTEGER
+        initialValue: { type: Sequelize.DECIMAL(10, 5), allowNull: false },
+        finalValue: { type: Sequelize.DECIMAL(10, 5), allowNull: false }
     });
 };
+
 
 module.exports = Rank;

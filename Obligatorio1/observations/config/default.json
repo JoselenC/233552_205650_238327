@@ -1,7 +1,20 @@
 {
-    "repositoryObservations": {
-        "url": "mongodb://localhost:27017/observations",
-        "database": "observations"
+    "repoObservation": {
+        "database": "observationDB",
+        "user": "root",
+        "password": "secret",
+        "options": {
+            "host": "localhost",
+            "dialect": "mysql",
+            "pool": {
+                "max": 10,
+                "min": 0,
+                "acquire": 30000,
+                "idle": 10000
+            }
+        }
     },
-    "port":6067
+    "pipeline": {
+        "pipe": "queue"
+    }
 }
