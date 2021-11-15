@@ -13,7 +13,7 @@ const Observation = (schema, types) => {
         value:Sequelize.DECIMAL(10,5),
         standarizedUnit:  Sequelize.STRING,
         standarizedData:  Sequelize.DECIMAL(10,5),
-        time: Sequelize.INTEGER,
+        time: Sequelize.DECIMAL(10,5),
         ESN: Sequelize.STRING
     });
 };
