@@ -19,12 +19,9 @@ router.post("/gateway/consumer", (ctx, next) =>
     exporterController.saveConsumer(ctx, next)
 );
 
-router.get("/gateway/consumer/:name", (ctx, next) =>
-    exporterController.getConsumersByName(ctx, next)
-);
 
-router.get("/gateway/data", (ctx, next) =>
-    exporterController.getData()
+router.get("/gateway/exporter/consumer/:email", (ctx, next) =>
+    exporterController.getData(ctx, next)
 );
 
 router.get("/gateway/analytics/:email", (ctx, next) =>

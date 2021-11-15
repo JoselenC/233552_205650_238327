@@ -13,7 +13,7 @@ module.exports = class ObservationRepository {
             return observation;
         }
         catch (err) {
-            throw new Error("Sensor does not exist");
+            throw new Error(err.message);
         }
     }
 
