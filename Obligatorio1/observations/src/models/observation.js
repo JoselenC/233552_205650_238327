@@ -14,7 +14,8 @@ const Observation = (schema, types) => {
         standarizedUnit:  Sequelize.STRING,
         standarizedData:  Sequelize.DECIMAL(10,5),
         time: Sequelize.DECIMAL(10,5),
-        ESN: Sequelize.STRING
+        ESN: Sequelize.STRING,
+        path:Sequelize.STRING
     });
 };
 

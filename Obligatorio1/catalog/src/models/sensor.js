@@ -8,23 +8,23 @@ const Sensor = (schema, types) => {
             autoIncrement: true,
         },
         model: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         latitude: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         longitude: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         name: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         ESN: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             validate: { max: 16 },
             unique: true,
