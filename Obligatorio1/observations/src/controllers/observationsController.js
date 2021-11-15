@@ -23,7 +23,7 @@ module.exports = class GatewayController {
   }
 
   async saveObservation(ctx, next) {
-
+    let init = Date.now();
     try {
       let esn = ""
       if (ctx.params.esn != "")
@@ -34,14 +34,14 @@ module.exports = class GatewayController {
         throw new Error("Invalid empty esn");
       let data = ctx.request.body;
       data.ESN = esn;
-      data.registrationDate = Date.now();
-      pipeline.use(convertFilter);  
-      pipeline.use(analyzeFilter);  
-      pipeline.use(saveFilter);  
+      data.registrationDate = init;
+      pipeline.use(convertFilter);
+      pipeline.use(analyzeFilter);
+      pipeline.use(saveFilter);
       pipeline.run(data)
       return await new Promise((resolve, reject) => {
-        pipeline.on('end', (result) => {           
-          resolve(result)        
+        pipeline.on('end', (result) => {
+          resolve(result)
         })
         pipeline.on('error', (err) => {
           console.log(`The error is ${err}`);
