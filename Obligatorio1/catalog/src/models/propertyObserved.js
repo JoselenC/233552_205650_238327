@@ -8,13 +8,14 @@ const PropertyObserved = (schema, types) => {
             autoIncrement: true,
         },
         name: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         unit: {
-            type: types.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
+
     });
 };
 
