@@ -41,6 +41,7 @@ module.exports = class ObservationRepository {
     async save(data) {
         try {
             if (await this.existProperty(data.ESN, data.name)) {
+                data.path= "sensor.esn=" + data.ESN + ".property.name="+data.name
                 let end = Date.now();  
                 data.time = parseFloat((end - data.registrationDate)/1000).toFixed(2);
                 console.log(data.time)
