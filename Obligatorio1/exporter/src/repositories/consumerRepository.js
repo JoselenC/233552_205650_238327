@@ -23,17 +23,12 @@ module.exports = class ConsumerRepository {
   }
 
 
-  async generateURL() {
-    crypto.randomBytes(64, (err, buf) => {
-      if (err) throw err;
-      return buf.toString('hex')
-    });
-  }
-
+ 
   async saveConsumer(data) {
-    let existing = await Consumer.findOne({ Name: data.Name });
+    data.Password = md5(data.Password);
+    let existing = await Consumer.findOne({ Email: data.Email });
     if (existing == null) {
-      data.URL = generateURL();
+      data.URL = "http://localhost:8080/gateway/exporter/consumer/"+ data.Email;
       let consumer = await Consumer.create(data);
       return consumer.toObject();
     } else {
@@ -41,9 +36,9 @@ module.exports = class ConsumerRepository {
     }
   }
 
-  async findByName(name) {
+  async findByEmail(email) {
     try {
-      let consumer = await Consumer.findOne({ Name: name });
+      let consumer = await Consumer.findOne({ Email: email });
       return consumer ? consumer : null;
     } catch (err) {
       return null;
@@ -51,9 +46,9 @@ module.exports = class ConsumerRepository {
   }
 
   async login(data) {
-    if (data.URL != "") {
-      let URL = md5(data.URL);
-      let consumer = await Consumer.findOne({URL: URL });
+    if (data.Password != "" && data.Email != "") {
+      let password = md5(data.Password);
+      let consumer = await Consumer.findOne({Password: password });
       if (consumer != null) {
         const token = jwt.sign(
           {
@@ -61,7 +56,8 @@ module.exports = class ConsumerRepository {
             Id: consumer.Id,
             URL: consumer.URL,
             Proposito: consumer.Proposito,
-            FechaRegistro: consumer.FechaRegistro
+            FechaRegistro: consumer.FechaRegistro,
+            Email: consumer.Email
           },
           process.env.TOKEN_SECRET
         );

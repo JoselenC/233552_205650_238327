@@ -5,7 +5,17 @@ module.exports = class ObservationService {
         this.observationRepository = new ObservationRepository();       
     }
 
-    async findAll() {
+    async findAllByConsumer(consumer) {
+        let observations=[];
+        let allObservations = await this.observationRepository.findAll();
+        allObservations.forEach(element => {
+            if(element.registrationDate>consumer.ObserveFrom)
+             observations.push(element)
+        });
+        return observations;
+    }
+
+    async findAll(consumer) {
         return await this.observationRepository.findAll();
     }
 

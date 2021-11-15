@@ -34,6 +34,7 @@ module.exports = class GatewayController {
         throw new Error("Invalid empty esn");
       let data = ctx.request.body;
       data.ESN = esn;
+      data.registrationDate = Date.now();
       pipeline.use(convertFilter);  
       pipeline.use(analyzeFilter);  
       pipeline.use(saveFilter);  
