@@ -7,14 +7,8 @@ module.exports = class PersonNotifyRepository {
         this.repository = new Repository();
     }
 
-    async getAll(limit, offset) {
+    async getAll() {
         var query = await PersonNotify.find();
-        if (limit) {
-            query.limit(limit);
-        }
-        if (offset) {
-            query.skip(offset);
-        }
         let personsNotify = await query;
         return personsNotify.map((personNotify) => personNotify.toObject());
     }

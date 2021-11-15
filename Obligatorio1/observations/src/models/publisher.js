@@ -14,6 +14,6 @@ module.exports = class Publisher {
       type: "save",
       data: data,
     });
-    await addData.finished();
+    await addData.finished();    
   }
 }

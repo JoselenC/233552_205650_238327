@@ -35,6 +35,8 @@ module.exports = class GatewayController {
   async saveConsumer(ctx, next) {
     try {
       let data = ctx.request.body;
+      data.RegistrationDate = Date.now();
+      data.ObserveFrom = Date.now();
       let con = await this.exporterService.saveConsumer(data);
       if (con) {
         ctx.body = con;
@@ -55,10 +57,25 @@ module.exports = class GatewayController {
     }
   }
 
-
   async getData(ctx, next) {
     try {
+      let email = ctx.params.email;
+      let consumer = await this.exporterService.findByEmail(email);
+      let con = await this.exporterService.getData(consumer);
+      consumer.ObserveFrom = Date.now();
+      await consumer.save()
+      ctx.body = con;
+    } catch (err) {
+      ctx.status = 500;
+      ctx.body = { status: 500, message: err.message };
+    }
+
+  }
+
+  async getData2(ctx, next) {
+    try {
       let decode = decodeJwt(ctx.get("Authorization"), this.secret);
+      console.log(decode)
       let data = ctx.request.body;
       let con = await this.exporterService.getData();
       if (con) {
