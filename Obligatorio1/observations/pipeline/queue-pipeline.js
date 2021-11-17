@@ -15,23 +15,28 @@ class QueuePipeline extends AbstractPipeline {
         if (this.queues.length > 0) {
             if (!this.initialized) {
                 for (let i = 0; i < this.queues.length; i++) {
+                    let length = this.queues.length;
                     let queue = this.queues[i];
                     let filter = this.filters[i];
                     let next = (this.queues.length !== i + 1) ? this.queues[i + 1] : null;
                     queue.process((job, done) => {
                         filter.call(this, job.data, (err, result) => {
+
                             if (err) {
                                 this.emit('error', err);
                                 done(err);
                             } else {
                                 if (next) {
                                     next.add(result, { removeOnComplete: true });
-                                }                       
-                                done();                                
+                                }
+                                done();
                             }
-                        });
+                        }).catch(function (err) {  
+                            done(err);
+                            throw new Error(err.message)                                      
+                        })
                     });
-                    if (!next) {                   
+                    if (!next) {
                         queue.on('completed', (job) => {
                             this.emit('end', job.data);
                         });
