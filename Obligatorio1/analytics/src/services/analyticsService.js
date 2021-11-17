@@ -40,7 +40,7 @@ module.exports = class AnalyticsService {
                     }
                 }).sendMail(mailOptions, function (error, info) {
                     if (error) {
-                        console.log(error);
+                       throw new Error(error.message);
                     } else {
                         console.log('Email enviado: ' + info.response);
                     }

@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^3.3.6",
+    "winston": "^3.3.3",
     "all": "0.0.0",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",

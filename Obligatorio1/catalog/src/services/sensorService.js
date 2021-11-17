@@ -10,32 +10,49 @@ module.exports = class SensorService {
     async save(data) {
         return await this.sensorRepository.save(data);
     }
+
     async findByEsn(esn) {
-        return await this.sensorRepository.findByEsn(esn);
+        try {
+            return await this.sensorRepository.findByEsn(esn);
+        } catch (err) {
+            throw new Error("Sensor does not exist")
+        }
     }
 
     async existSensorProperty(sensor, propertyName) {
-        var exist = false;
-        sensor.propertiesObserved.forEach(element => {
-            if (element.name == propertyName) {
-                exist = true;
-            }
-        });
-        return exist;
+        try {
+            var exist = false;
+            sensor.propertiesObserved.forEach(element => {
+                if (element.name == propertyName) {
+                    exist = true;
+                }
+            });
+            return exist;
+        } catch (err) {
+            throw new Error("Sensor does not exist")
+        }
     }
 
     async sensorProperty(esn, propertyName) {
-        let property= null;
-        var sensor = await this.findByEsn(esn);
-        sensor.propertiesObserved.forEach(element => {
-            if (element.name == propertyName) {
-                property= element;              
-            }
-        });
-        return property;
+        try {
+            let property = null;
+            var sensor = await this.findByEsn(esn);
+            sensor.propertiesObserved.forEach(element => {
+                if (element.name == propertyName) {
+                    property = element;
+                }
+            });
+            return property;
+        } catch (err) {
+            throw new Error("Sensor does not exist")
+        }
     }
 
-    async exist(sensor) {
-        return await this.sensorRepository.findByEsn(sensor.esn) != null
+    async exist(esn) {
+        try {
+            return await this.sensorRepository.findByEsn(esn) != null
+        } catch (err) {
+            throw new Error("Sensor does not exist")
+        }
     }
 }

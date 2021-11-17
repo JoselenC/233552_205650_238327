@@ -13,7 +13,7 @@ module.exports = createLogger({
     new transports.File({
       maxsize: 5120000,
       maxFiles: 5,
-      filename: `${__dirname}/../logger/log_file.log`,
+      filename: `${__dirname}/../logger/logs.log`,
     }),
     new transports.Console({
       level: "info",

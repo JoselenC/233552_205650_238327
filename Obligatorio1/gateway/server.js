@@ -10,9 +10,10 @@ module.exports.initServer = async function () {
     app.use(bodyParser());
     app.use(router.routes());
     app.use(router.allowedMethods());
-    app.use(respond());
+    app.use(respond())
 
-    app.listen(8080);
+    app.listen(port);
     
+
     console.log(`Server started, see http://localhost:${port}`);
 }

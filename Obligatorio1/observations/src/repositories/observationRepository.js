@@ -20,7 +20,11 @@ module.exports = class ObservationRepository {
 
     async sensorProperty(esn, propertyName) {
         try {
-            return await this.sensorService.sensorProperty(esn, propertyName)
+            let property = await this.sensorService.sensorProperty(esn, propertyName)
+            if (property != null)
+                return property
+            else
+                throw new Error("Property does not exist");
         }
         catch (err) {
             throw new Error("Property does not exist");
@@ -30,8 +34,9 @@ module.exports = class ObservationRepository {
     async existProperty(esn, propertyName) {
         try {
             var sensor = await this.sensorService.findByEsn(esn);
-            return await this.sensorService.
+            var exist = await this.sensorService.
                 existSensorProperty(sensor, propertyName);
+            return exist
         }
         catch (err) {
             throw new Error("Sensor does not exist");
@@ -41,14 +46,14 @@ module.exports = class ObservationRepository {
     async save(data) {
         try {
             if (await this.existProperty(data.ESN, data.name)) {
-                data.path= "sensor.esn=" + data.ESN + ".property.name="+data.name
-                let end = Date.now();  
-                data.time = parseFloat((end - data.registrationDate)/1000).toFixed(2);
+                let end = Date.now();
+                data.time = parseFloat((end - data.registrationDate) / 1000).toFixed(2);
                 console.log(data.time)
                 return await this.observationRepository.create(data);
             }
-            else
+            else {
                 throw new Error("That reading does not belong to any observable property of said sensor.");
+            }
         }
         catch (err) {
             throw new Error(err.message);
