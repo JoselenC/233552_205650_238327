@@ -1,4 +1,5 @@
-const Server = require('./httpServer');
+const server = require('./src/services/deferBinding');
+const Server = new server();
 const ExporterRepository = require('../exporter/src/repositories/repository');
 const AnalyticsRepository = require('../analytics/src/repositories/repository');
 const CatalogRepository = require('../catalog/src/repositories/repository');
