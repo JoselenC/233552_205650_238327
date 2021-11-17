@@ -1,9 +1,9 @@
 var config = require('config');
 
 function deferBinding() {
-    let type = config.get('pipeline.pipe');
+    let serverType = config.get('server.type');
     let implementation;
-    implementation = require(`./${type}-pipeline`);
+    implementation = require(`./${serverType}Server`);
     return implementation;
 }
 
