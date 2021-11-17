@@ -1,4 +1,4 @@
-const Server = require('./server');
+const Server = require('./httpServer');
 const ExporterRepository = require('../exporter/src/repositories/repository');
 const AnalyticsRepository = require('../analytics/src/repositories/repository');
 const CatalogRepository = require('../catalog/src/repositories/repository');
