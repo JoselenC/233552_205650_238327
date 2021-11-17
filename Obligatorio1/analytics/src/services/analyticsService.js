@@ -63,7 +63,7 @@ module.exports = class AnalyticsService {
 
     async calculateDailyAverage(values, startDate, endDate) {
         if (endDate.getYear() - startDate.getYear() == 0 || (endDate.getYear() - startDate.getYear() == 1 && endDate.getMonth() <= startDate.getMonth())) {
-            const reducer = (previousValue, currentValue) => previousValue.observation + currentValue.observation;
+            const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
             var totalSum = values.reduce(reducer)
             return totalSum / values.length || 0;
         }
@@ -72,7 +72,7 @@ module.exports = class AnalyticsService {
 
     async calculateMonthlyAverage(values, startDate, endDate) {
         if (endDate.getYear() - startDate.getYear() < 10 || (endDate.getYear() - startDate.getYear() == 10 && endDate.getMonth() <= startDate.getMonth())) {
-            const reducer = (previousValue, currentValue) => previousValue.observation + currentValue.observation;
+            const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
             var averagePerMonth = [];
             for (var d = startDate.getYear(); d <= endDate.getYear(); d++) {
                 let filteredValuesByYear = values.filter(v => v.getYear() == d);
@@ -110,7 +110,7 @@ module.exports = class AnalyticsService {
     }
 
     async calculateAnnualAverage(values, startDate, endDate) {
-        const reducer = (previousValue, currentValue) => previousValue.observation + currentValue.observation;
+        const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
         var averagePerYear = [];
         for (var d = startDate.getYear(); d <= endDate.getYear(); d++) {
             let filteredValues = values.filter(v => v.getYear() == d);

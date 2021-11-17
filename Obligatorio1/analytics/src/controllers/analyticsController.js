@@ -1,9 +1,9 @@
-const DataCollectedService = require("../../../observations/src/services/dataCollectedService");
+const ObservationService = require("../../../observations/src/services/observationService");
 const AnalyticsService = require("../services/analyticsService");
 
 module.exports = class GatewayController {
   constructor() {
-    this.dataCollectedService = new DataCollectedService();
+    this.observationService = new ObservationService();
     this.analyticsService = new AnalyticsService();
   }
 
@@ -37,9 +37,10 @@ async calculateAverageValues(ctx, next) {
     try {
       let startDate = ctx.params.startDate;
       let endDate = ctx.params.endDate;
-      let observedProperty = ctx.params.observedProperty;
+      let observedPropertyName = ctx.params.observedPropertyName;
+      let observedPropertyUnit = ctx.params.observedPropertyUnit;
       let sensor = ctx.params.sensor;
-      let values = await this.dataCollectedService.findObservedPropertiesByDateAndSensor(startDate, endDate, observedProperty, sensor);
+      let values = await this.observationService.findObservedPropertiesByDateAndSensor(startDate, endDate, observedPropertyName, observedPropertyUnit, sensor);
       let dailyAverage = await this.analyticsService.calculateDailyAverage(values, startDate, endDate);
       let monthlyAverage = await this.analyticsService.calculateMonthlyAverage(values, startDate, endDate);
       let annualAverage = await this.analyticsService.calculateAnnualAverage(values, startDate, endDate);

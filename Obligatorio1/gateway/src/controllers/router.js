@@ -44,7 +44,7 @@ router.get("/gateway/property", (ctx, next) =>
     propertyObservedController.getAll(ctx, next)
 );
 
-router.get("/gateway/analytics/:startDate/:endDate/:observedProperty/:sensor", (ctx, next) =>
+router.get("/gateway/analytics/averages/:startDate/:endDate/:observedPropertyName/:observedPropertyUnit/:sensor", (ctx, next) =>
     analyticsController.calculateAverageValues(ctx, next)
 );
 
