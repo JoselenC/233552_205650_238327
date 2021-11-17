@@ -55,5 +55,8 @@
     },
     "pipeline": {
         "pipe": "queue"
+    },
+    "server": {
+        "type": "http"
     }
 }
