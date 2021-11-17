@@ -2,11 +2,14 @@ const Publisher = require('../src/models/publisher');
 const publisher = new Publisher();
 
 const analyzeFilter = async (input, next) => {
-  await publisher.publishSaveObservation(input);
+  await publisher.publishSaveObservation(input)
+  .catch(function (err) {
+    throw new Error(err.message);
+  })
 }
 
 module.exports = {
-    analyzeFilter,
+  analyzeFilter,
 };
 
 if (require.main === module) {

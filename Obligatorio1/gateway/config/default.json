@@ -1,4 +1,5 @@
 {
+    "portGateway":8080,
     "repositoryExporter": {
         "url": "mongodb://localhost:27017/exporter",
         "database": "exporter"

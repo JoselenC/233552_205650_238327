@@ -6,6 +6,7 @@ const PropertyObservedController = require("../../../catalog/src/controllers/pro
 const SensorController = require("../../../catalog/src/controllers/sensorController");
 const RankController = require("../../../catalog/src/controllers/rankController");
 const ObservationsController = require("../../../observations/src/controllers/observationsController");
+const respond = require("../middlewares/respond");
 
 const router = new Router();
 const exporterController = new ExporterController();
@@ -14,6 +15,7 @@ const propertyObservedController = new PropertyObservedController();
 const sensorController = new SensorController();
 const observationsController = new ObservationsController();
 const rankController = new RankController();
+
 
 router.post("/gateway/consumer", (ctx, next) =>
     exporterController.saveConsumer(ctx, next)
@@ -64,19 +66,21 @@ router.post("/gateway/observation", async (ctx, next) => {
     await observationsController.saveObservation(ctx, next)
         .then((value) => {
             ctx.body = { data: value }
-        }).catch(function () {
-            console.log("Promise Rejected");
-       })
+        }).catch(function (err) {
+            ctx.status = 400;
+            ctx.body = { status: 400, message: err.message };
+        })
 });
 
 router.post("/gateway/observation/:esn", async (ctx, next) => {
     await observationsController.saveObservation(ctx, next)
         .then((value) => {
             ctx.body = { data: value }
-        }).catch(function () {
-            console.log("Promise Rejected");
-       })
-       
+        }).catch(function (err) {
+            ctx.status = 400;
+            ctx.body = { status: 400, message: err.message };
+        })
+
 });
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const ExporterService = require("../services/exporterService");
-const logger = require("../../logger/logger");
+const createLogger = require("../../../logger/log");
 
 module.exports = class GatewayController {
   constructor() {
@@ -14,18 +14,18 @@ module.exports = class GatewayController {
       if (consumer) {
         ctx.set("Authorization", consumer);
         ctx.body = consumer;
-        logger.info(`${ctx.request.method} on url ${ctx.request.url}`);
+        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
       } else {
         ctx.status = 400;
         ctx.body = { status: 400, message: `Invalid consumer data` };
-        logger.error(
+        createLogger.error(
           `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
         );
       }
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
-      logger.error(
+      createLogger.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
       );
     }
@@ -40,18 +40,18 @@ module.exports = class GatewayController {
       let con = await this.exporterService.saveConsumer(data);
       if (con) {
         ctx.body = con;
-        logger.info(`${ctx.request.method} on url ${ctx.request.url}`);
+        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
       } else {
         ctx.status = 400;
         ctx.body = { status: 400, message: `Invalid con data` };
-        logger.error(
+        createLogger.error(
           `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
         );
       }
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
-      logger.error(
+      createLogger.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
       );
     }
@@ -80,19 +80,19 @@ module.exports = class GatewayController {
       let con = await this.exporterService.getData();
       if (con) {
         ctx.body = con;
-        logger.info(`${ctx.request.method} on url ${ctx.request.url}`);
+        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
 
       } else {
         ctx.status = 400;
         ctx.body = { status: 400, message: "No permission" };
-        logger.error(
+        createLogger.error(
           `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
         );
       }
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
-      logger.error(
+      createLogger.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
       );
     }

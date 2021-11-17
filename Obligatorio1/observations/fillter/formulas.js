@@ -32,6 +32,7 @@ module.exports = class Formula {
             resolve(element.value)
           }
         });
+        reject("Formula does not exist")
     })
   }
 

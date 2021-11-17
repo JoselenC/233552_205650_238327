@@ -4,26 +4,22 @@ const observarionService = new ObservationService();
 const formula = new Formula();
 
 const convertFilter = async (input, next) => {
-  try {
     const unit = input.unit;
     const name = input.name;
     const esn = input.ESN;
-    const property = await observarionService.sensorProperty(esn, name);
-    if (property != null) {
-      input.standarizedUnit = property.unit;
-      await formula.transform(input.value, property.unit, input.unit)
-        .then((value) => {
-          input.standarizedData=value
-        }).catch(function () {
-            console.log("Promise Rejected");
-       })
+    const property = await observarionService.sensorProperty(esn, name)
+    .catch(function () {
+      throw new Error("Property does not exist");
+    })
+    if(property!=null){
+    input.standarizedUnit = property.unit;
+    await formula.transform(input.value, property.unit, input.unit)
+      .then((value) => {
+        input.standarizedData = value
+      }).catch(function () {
+        throw new Error("Formula does not exist");
+      })
     }
-    else {
-      throw new Error("That reading does not belong to any observable property of said sensor.")
-    }
-  } catch (err) {
-    throw new Error(err.message)
-  }
 }
 
 module.exports = {
