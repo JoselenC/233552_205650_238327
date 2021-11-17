@@ -8,16 +8,16 @@ module.exports = class ExporterService {
         this.observationService = new ObservationService();
     }
 
-    async getData(){
-        return await this.observationService.findAll();
+    async getData(consumer){
+        return await this.observationService.findAllByConsumer(consumer);
     }
 
     async saveConsumer(data) {
         return await this.consumerRepository.saveConsumer(data);
     }
 
-    async findByName(name) {
-        return await this.consumerRepository.findByName(name);
+    async findByEmail(email) {
+        return await this.consumerRepository.findByEmail(email);
     }
 
     async login(data) {

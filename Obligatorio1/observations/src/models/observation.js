@@ -7,13 +7,15 @@ const Observation = (schema, types) => {
             primaryKey: true,
             autoIncrement: true,
         },
+        registrationDate: Sequelize.DATE,
         name: Sequelize.STRING,
         unit: Sequelize.STRING,
-        value: Sequelize.INTEGER,
+        value:Sequelize.DECIMAL(10,5),
         standarizedUnit:  Sequelize.STRING,
         standarizedData:  Sequelize.DECIMAL(10,5),
-        time: Sequelize.INTEGER,
-        ESN: Sequelize.STRING
+        time: Sequelize.DECIMAL(10,5),
+        ESN: Sequelize.STRING,
+        path:Sequelize.STRING
     });
 };
 
