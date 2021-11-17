@@ -40,7 +40,7 @@ module.exports = class AnalyticsService {
                     }
                 }).sendMail(mailOptions, function (error, info) {
                     if (error) {
-                       throw new Error(error.message);
+                        throw new Error(error.message);
                     } else {
                         console.log('Email enviado: ' + info.response);
                     }
@@ -61,65 +61,128 @@ module.exports = class AnalyticsService {
 
     }
 
-    async calculateDailyAverage(values, startDate, endDate) {
-        if (endDate.getYear() - startDate.getYear() == 0 || (endDate.getYear() - startDate.getYear() == 1 && endDate.getMonth() <= startDate.getMonth())) {
-            const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
-            var totalSum = values.reduce(reducer)
-            return totalSum / values.length || 0;
-        }
-        return -1;
-    }
-
-    async calculateMonthlyAverage(values, startDate, endDate) {
-        if (endDate.getYear() - startDate.getYear() < 10 || (endDate.getYear() - startDate.getYear() == 10 && endDate.getMonth() <= startDate.getMonth())) {
-            const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
-            var averagePerMonth = [];
-            for (var d = startDate.getYear(); d <= endDate.getYear(); d++) {
-                let filteredValuesByYear = values.filter(v => v.getYear() == d);
-                if (filteredValuesByYear.length != 0) {
-                    if (d == endDate.getYear()) {
-                        for (var m = 0; d <= endDate.getMonth(); m++) {
-                            let filteredValuesByMonth = filteredValuesByYear.filter(v => v.getMonth() == m);
-                            if (filteredValuesByMonth.length != 0) {
-                                let sumPerMonth = filteredValuesByMonth.reduce(reducer);
-                                averagePerMonth.push(sumPerMonth / filteredValuesByMonth.length)
-                            }
-                        }
-                    } else if (d == startDate.getYear()) {
-                        for (var m = startDate.getMonth(); d <= 11; m++) {
-                            let filteredValuesByMonth = filteredValuesByYear.filter(v => v.getMonth() == m);
-                            if (filteredValuesByMonth.length != 0) {
-                                let sumPerMonth = filteredValuesByMonth.reduce(reducer);
-                                averagePerMonth.push(sumPerMonth / filteredValuesByMonth.length)
-                            }
-                        }
-                    } else {
-                        for (var m = 0; d <= 11; m++) {
-                            let filteredValuesByMonth = filteredValuesByYear.filter(v => v.getMonth() == m);
-                            if (filteredValuesByMonth.length != 0) {
-                                let sumPerMonth = filteredValuesByMonth.reduce(reducer);
-                                averagePerMonth.push(sumPerMonth / filteredValuesByMonth.length)
-                            }
-                        }
-                    }
+    async calculateDailyAverage(observations, data, cantDays) {
+        let startDate = data.startDate;
+        let endDate = data.endDate;
+        let startDay = new Date(startDate).getUTCDate();
+        let finalDay = new Date(endDate).getUTCDate();
+        let count = 0;
+        let countDays = 1;
+        let avergaeDay = [];
+        let average = 0;
+        let first = false;
+        observations.forEach(element => {
+            if (!first && new Date(element.registrationDate).getUTCDate() > startDay
+                && countDays <= cantDays) {
+                avergaeDay.push({ day: countDays, average: 0 })
+                startDay = startDay + 1
+                countDays = countDays + 1;
+            }
+            if (startDay <= finalDay && countDays <= cantDays) {
+                first = true;
+                if (new Date(element.registrationDate).getUTCDate() == startDay) {
+                    average += parseFloat(element.standarizedData);
+                    count = count + 1;
+                }
+                else {
+                    avergaeDay.push({ day: countDays, average: average / count })
+                    startDay = startDay + 1;
+                    countDays = countDays + 1;
+                    count = 0;
+                    average = 0;
                 }
             }
-            return averagePerMonth.reduce(reducer) / averagePerMonth.length || 0;
-        }
-        return -1;
+            if (startDay > finalDay && countDays < cantDays) {
+                avergaeDay.push({ day: countDays, average: 0 })
+                cantDays = cantDays - 1;
+            }
+        });
+        if (cantDays == (finalDay-startDay) )
+            avergaeDay.push({ day: countDays, average: average / count })
+        return avergaeDay;
     }
 
-    async calculateAnnualAverage(values, startDate, endDate) {
-        const reducer = (previousValue, currentValue) => previousValue.value + currentValue.value;
-        var averagePerYear = [];
-        for (var d = startDate.getYear(); d <= endDate.getYear(); d++) {
-            let filteredValues = values.filter(v => v.getYear() == d);
-            if (filteredValues.length != 0) {
-                let sumPerYear = filteredValues.reduce(reducer);
-                averagePerYear.push(sumPerYear / filteredValues.length)
+    async calculateMonthlyAverage(observations, data, cantMonths) {
+        let startDate = data.startDate;
+        let endDate = data.endDate;
+        let startMonth = new Date(startDate).getMonth()();
+        let finalMonth = new Date(endDate).getMonth()();
+        let count = 0;
+        let countMonth = 1;
+        let averageMonth = [];
+        let average = 0;
+        let first = false;
+        observations.forEach(element => {
+            if (!first && new Date(element.registrationDate).getMonth()() > startMonth
+                && countMonth <= cantMonths) {
+                avergaeDay.push({ day: countMonth, average: 0 })
+                startMonth = startMonth + 1
+                countMonth = countMonth + 1;
             }
-        }
-        return averagePerYear.reduce(reducer) / averagePerYear.length || 0;
+            if (startMonth <= finalMonth && countMonth <= cantMonths) {
+                first = true;
+                if (new Date(element.registrationDate).getUTCDate() == startMonth) {
+                    average += parseFloat(element.standarizedData);
+                    count = count + 1;
+                }
+                else {
+                    averageMonth.push({ day: countMonth, average: average / count })
+                    startMonth = startMonth + 1;
+                    countMonth = countMonth + 1;
+                    count = 0;
+                    average = 0;
+                }
+            }
+            if (startMonth > finalMonth && countMonth < cantMonths) {
+                averageMonth.push({ day: countMonth, average: 0 })
+                cantMonths = cantMonths - 1;
+            }
+        });
+        if (cantDays == (finalMonth-startMonth) )
+        averageMonth.push({ day: countMonth, average: average / count })
+        return averageMonth;
     }
+
+    async calculateAnnualAverage(observations, data, cantYears) {
+        let startDate = data.startDate;
+        let endDate = data.endDate;
+        let startYear = new Date(startDate).getFullYear();
+        let finalYear = new Date(endDate).getFullYear();
+        let count = 0;
+        let countYears = 1;
+        let avergaeYear = [];
+        let average = 0;
+        let first = false;
+        observations.forEach(element => {
+            if (!first && new Date(element.registrationDate).getFullYear() > startYear
+                && countYears <= cantYears) {
+                    avergaeYear.push({ day: countYears, average: 0 })
+                startYear = startYear + 1
+                countYears = countYears + 1;
+            }
+            if (startYear <= finalYear && countYears <= cantYears) {
+                first = true;
+                if (new Date(element.registrationDate).getUTCDate() == startYear) {
+                    average += parseFloat(element.standarizedData);
+                    count = count + 1;
+                }
+                else {
+                    avergaeYear.push({ day: countYears, average: average / count })
+                    startYear = startYear + 1;
+                    countYears = countYears + 1;
+                    count = 0;
+                    average = 0;
+                }
+            }
+            if (startYear > finalYear && countYears < cantYears) {
+                avergaeYear.push({ day: countYears, average: 0 })
+                cantYears = cantYears - 1;
+            }
+        });
+        if (cantYears == (finalYear-startYear) )
+        avergaeYear.push({ day: countDays, average: average / count })
+        return avergaeYear;
+    }
+
 
 }

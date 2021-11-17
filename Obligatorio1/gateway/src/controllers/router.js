@@ -43,16 +43,21 @@ router.get("/gateway/property", (ctx, next) =>
     propertyObservedController.getAll(ctx, next)
 );
 
-router.get("/gateway/analytics/averages/:startDate/:endDate/:observedPropertyName/:observedPropertyUnit/:sensor", (ctx, next) =>
-    analyticsController.calculateAverageValues(ctx, next)
+router.get("/gateway/analytics/averages/days/:cantDays", (ctx, next) =>
+    analyticsController.calculateAverageValuesDays(ctx, next)
+);
+
+router.get("/gateway/analytics/averages/moths/:cantMoths", (ctx, next) =>
+    analyticsController.calculateAverageValuesMonts(ctx, next)
+);
+
+router.get("/gateway/analytics/averages/years/:cantYears", (ctx, next) =>
+    analyticsController.calculateAverageValuesYears(ctx, next)
 );
 
 router.post("/gateway/property", (ctx, next) =>
     observationsController.save(ctx, next)
 );
-
-
-
 
 router.post("/gateway/sensor", (ctx, next) =>
     sensorController.save(ctx, next)

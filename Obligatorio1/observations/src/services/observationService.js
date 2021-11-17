@@ -40,7 +40,7 @@ module.exports = class ObservationService {
         return await this.observationRepository.findByName(name);
     }
 
-    async findObservedPropertiesByDateAndSensor(startDate, endDate, observedPropertyName, observedPropertyUnit , sensor){
-        return await this.observationRepository.findObservedPropertiesByDateAndSensor(startDate, endDate, observedPropertyName, observedPropertyUnit, sensor); 
+    async findPropertiesByDateAndSensor(data){
+        return await this.observationRepository.findPropertiesByDateAndSensor(data); 
     }
 }
