@@ -61,24 +61,25 @@ module.exports = class AnalyticsService {
 
     }
 
-    async calculateDailyAverage(observations, data, cantDays) {
+    async calculateDailyAverage(observations, data) {
         let startDate = data.startDate;
         let endDate = data.endDate;
         let startDay = new Date(startDate).getUTCDate();
         let finalDay = new Date(endDate).getUTCDate();
         let count = 0;
-        let countDays = 1;
+        let countDays = 0;
         let avergaeDay = [];
         let average = 0;
         let first = false;
+        if (finalDay < startDay)
+            throw new Error("Incorrect rank")
         observations.forEach(element => {
-            if (!first && new Date(element.registrationDate).getUTCDate() > startDay
-                && countDays <= cantDays) {
+            if (!first && new Date(element.registrationDate).getUTCDate() > startDay) {
                 avergaeDay.push({ day: countDays, average: 0 })
                 startDay = startDay + 1
                 countDays = countDays + 1;
             }
-            if (startDay <= finalDay && countDays <= cantDays) {
+            if (startDay <= finalDay) {
                 first = true;
                 if (new Date(element.registrationDate).getUTCDate() == startDay) {
                     average += parseFloat(element.standarizedData);
@@ -92,58 +93,55 @@ module.exports = class AnalyticsService {
                     average = 0;
                 }
             }
-            if (startDay > finalDay && countDays < cantDays) {
-                avergaeDay.push({ day: countDays, average: 0 })
-                cantDays = cantDays - 1;
-            }
         });
-        if (cantDays == (finalDay-startDay) )
+        if (countDays == (finalDay - startDay) + 1)
             avergaeDay.push({ day: countDays, average: average / count })
+        else if (finalDay == startDay)
+            avergaeDay.push({ day: 1, average: average / count })
         return avergaeDay;
     }
 
-    async calculateMonthlyAverage(observations, data, cantMonths) {
+    async calculateMonthlyAverage(observations, data) {
         let startDate = data.startDate;
         let endDate = data.endDate;
-        let startMonth = new Date(startDate).getMonth()();
-        let finalMonth = new Date(endDate).getMonth()();
+        let startMonth = new Date(startDate).getMonth();
+        let finalMonth = new Date(endDate).getMonth();
         let count = 0;
         let countMonth = 1;
         let averageMonth = [];
         let average = 0;
         let first = false;
+        if (finalMonth < startMonth)
+            throw new Error("Incorrect rank")
         observations.forEach(element => {
-            if (!first && new Date(element.registrationDate).getMonth()() > startMonth
-                && countMonth <= cantMonths) {
-                avergaeDay.push({ day: countMonth, average: 0 })
+            if (!first && new Date(element.registrationDate).getMonth() > startMonth) {
+                avergaeDay.push({ Month: countMonth, average: 0 })
                 startMonth = startMonth + 1
                 countMonth = countMonth + 1;
             }
-            if (startMonth <= finalMonth && countMonth <= cantMonths) {
+            if (startMonth <= finalMonth) {
                 first = true;
-                if (new Date(element.registrationDate).getUTCDate() == startMonth) {
+                if (new Date(element.registrationDate).getMonth() == startMonth) {
                     average += parseFloat(element.standarizedData);
                     count = count + 1;
                 }
                 else {
-                    averageMonth.push({ day: countMonth, average: average / count })
+                    averageMonth.push({ Month: countMonth, average: average / count })
                     startMonth = startMonth + 1;
                     countMonth = countMonth + 1;
                     count = 0;
                     average = 0;
                 }
             }
-            if (startMonth > finalMonth && countMonth < cantMonths) {
-                averageMonth.push({ day: countMonth, average: 0 })
-                cantMonths = cantMonths - 1;
-            }
         });
-        if (cantDays == (finalMonth-startMonth) )
-        averageMonth.push({ day: countMonth, average: average / count })
+        if (countMonth == (finalMonth - startMonth))
+            averageMonth.push({ Month: countMonth, average: average / count })
+        else if (finalMonth == startMonth)
+            averageMonth.push({ Month: 1, average: average / count })
         return averageMonth;
     }
 
-    async calculateAnnualAverage(observations, data, cantYears) {
+    async calculateAnnualAverage(observations, data) {
         let startDate = data.startDate;
         let endDate = data.endDate;
         let startYear = new Date(startDate).getFullYear();
@@ -153,34 +151,33 @@ module.exports = class AnalyticsService {
         let avergaeYear = [];
         let average = 0;
         let first = false;
+        if (finalYear < startYear)
+            throw new Error("Incorrect rank")
         observations.forEach(element => {
-            if (!first && new Date(element.registrationDate).getFullYear() > startYear
-                && countYears <= cantYears) {
-                    avergaeYear.push({ day: countYears, average: 0 })
+            if (!first && new Date(element.registrationDate).getFullYear() > startYear) {
+                avergaeYear.push({ year: countYears, average: 0 })
                 startYear = startYear + 1
                 countYears = countYears + 1;
             }
-            if (startYear <= finalYear && countYears <= cantYears) {
+            if (startYear <= finalYear) {
                 first = true;
-                if (new Date(element.registrationDate).getUTCDate() == startYear) {
+                if (new Date(element.registrationDate).getFullYear() == startYear) {
                     average += parseFloat(element.standarizedData);
                     count = count + 1;
                 }
                 else {
-                    avergaeYear.push({ day: countYears, average: average / count })
+                    avergaeYear.push({ year: countYears, average: average / count })
                     startYear = startYear + 1;
                     countYears = countYears + 1;
                     count = 0;
                     average = 0;
                 }
             }
-            if (startYear > finalYear && countYears < cantYears) {
-                avergaeYear.push({ day: countYears, average: 0 })
-                cantYears = cantYears - 1;
-            }
         });
-        if (cantYears == (finalYear-startYear) )
-        avergaeYear.push({ day: countDays, average: average / count })
+        if (countYears == (finalYear - startYear))
+            avergaeYear.push({ year: countYears, average: average / count })
+        else if (finalYear == startYear)
+            avergaeYear.push({ year: 1, average: average / count })
         return avergaeYear;
     }
 
