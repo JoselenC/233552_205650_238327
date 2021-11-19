@@ -1,6 +1,18 @@
 const axios = require("axios");
 
 
+axios.interceptors.request.use(function (config) {
+  return config;
+}, function (error) {
+  return Promise.reject(error.response.data);
+});
+
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  return Promise.reject(error.response.data);
+});
+
 module.exports = class GatewayService {
   constructor() { }
 
@@ -9,14 +21,12 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6069/exporter/consumer`, data)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error("consumer already exist"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          reject(new Error("Consumer already exist"));
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
         });
     });
   }
@@ -26,30 +36,26 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6061/analytics/person`, data)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error(""));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          reject(new Error("Person to notify already exist"));
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
         });
     });
   }
 
-  async calculateAverageValues(data,criterion) {
+  async calculateAverageValues(data, criterion) {
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6061/analytics/averages/${criterion}`, data)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error(""));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -60,14 +66,12 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/sensor`, data)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          reject(new Error("Invalid sensor data"));
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
         });
     });
   }
@@ -77,14 +81,12 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/property`, data)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          reject(new Error("Invalid property observed data"));
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
         });
     });
   }
@@ -94,32 +96,26 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/rank`, data)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          reject(new Error("Invalid rank data"));
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
         });
     });
   }
 
-  async saveObservation(ctx,esn) {
+  async saveObservation(ctx, esn) {
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6067/observations/${esn}`, ctx)
         .then((response) => {
-          if (response.data === undefined || response.data.length === 0) {
-            reject(new Error(""));
-          } else {
-            ctx.body = {data: response.data};
-            resolve(response.data);          
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = {data: error.message};
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -130,13 +126,11 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6067/observations`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error(""));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -147,13 +141,11 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6065/catalog/property`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -164,13 +156,11 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6065/catalog/sensor`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -181,33 +171,26 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6065/catalog/rank`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error("No data"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
-
-
-
 
   async getConsumers(ctx) {
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6069/exporter/consumers/${ctx.params.email}`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error("No data found"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -218,13 +201,11 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6069/exporter/consumer/${ctx.params.email}`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error(""));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -237,20 +218,18 @@ module.exports = class GatewayService {
       return axios
         .get(`http://localhost:6061/analytics/person/${ctx.params.email}`, ctx)
         .then((response) => {
-          if (response.data.data === undefined || response.data.length === 0) {
-            reject(new Error("No data found"));
-          } else {
-            resolve(response.data);
-          }
+          ctx.body = { data: response.data };
+          resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
 
 
-  
+
 
 
 

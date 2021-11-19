@@ -66,16 +66,15 @@ module.exports = class GatewayController {
   }
 
   async saveObservation(ctx, next) {
-    try {
       let data = ctx.request.body;
       let esn = ctx.params.esn;
-      let message = await this.gatewayService.saveObservation(data,esn)
-      ctx.body = {data: message};
-      await next();
-    } catch (err) {
-      ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
-    }
+      await this.gatewayService.saveObservation(data,esn)    
+      .then((value) => {
+        ctx.body = { data: value }
+      }).catch(function (err) {
+        ctx.status = 404;
+        ctx.body = { status: 404, message: err.message };
+      })
   }
   
   async calculateAverageValues(ctx, next) {
@@ -145,15 +144,6 @@ module.exports = class GatewayController {
       ctx.body = { status: 400, message: err.message };
     }
   }
-
-
-
-
-
-
-
- 
-
 
   async getData(ctx, next) {
     try {

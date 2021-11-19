@@ -22,8 +22,8 @@ router.post("/observations/:esn", async (ctx, next) => {
       return value
     }).catch(function (err) {
       ctx.status = 400;
+      console.log(err.message)
       ctx.body = { status: 400, message: err.message };
-      throw new Error(err.message)
     })
 }
 );

@@ -49,7 +49,7 @@ router.post("/gateway/observation", async (ctx, next) => {
 });
 
 router.post("/gateway/observation/:esn", async (ctx, next) => {
-    await gatewayController.saveObservation(ctx, next)
+    await gatewayController.saveObservation(ctx, next)    
 });
 
 router.get("/gateway/observations", async (ctx, next) =>

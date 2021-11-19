@@ -24,30 +24,36 @@ module.exports = class SensorController {
         await next();
     }
 
-    async sensorProperty(ctx,next) {
-        let esn= ctx.params.esn;
-        let propertyName =ctx.params.name;
+    async sensorProperty(ctx, next) {
+        let esn = ctx.params.esn;
+        let propertyName = ctx.params.name;
         let sensor = await this.catalogService.sensorProperty(esn, propertyName);
         if (sensor) {
             ctx.body = { data: sensor };
         } else {
             ctx.status = 404;
-            ctx.body = { status: 404, message: `sensor #${name} not found` };
+            ctx.body = { status: 404, message: `sensor not found` };
         }
         await next();
     }
 
-    async existSensorProperty(ctx,next) {
-        let esn= ctx.params.esn;
-        let propertyName =ctx.params.name;
-        let sensor = await this.catalogService.sensorProperty(esn, propertyName)!=null;
-        if (sensor) {
-            ctx.body = { data: sensor };
-        } else {
+    async existSensorProperty(ctx, next) {
+        try {
+            let esn = ctx.params.esn;
+            let propertyName = ctx.params.name;
+            let sensor = await this.catalogService.sensorProperty(esn, propertyName) != null;
+            if (sensor) {
+                ctx.body = { data: sensor };
+            } else {
+                ctx.status = 404;
+                ctx.body = { status: 404, message: `sensor not found` };
+            }
+            await next();
+        }
+        catch (err) {
             ctx.status = 404;
             ctx.body = { status: 404, message: `sensor #${name} not found` };
         }
-        await next();
     }
 
     async findByName(ctx, next) {
@@ -57,7 +63,7 @@ module.exports = class SensorController {
             ctx.body = { data: sensor };;
         } else {
             ctx.status = 404;
-            ctx.body = { status: 404, message: `sensor #${name} not found` };
+            ctx.body = { status: 404, message: `sensor not found` };
         }
         await next();
     }
