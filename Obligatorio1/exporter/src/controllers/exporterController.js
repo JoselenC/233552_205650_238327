@@ -32,22 +32,14 @@ module.exports = class GatewayController {
   }
 
 
-  async saveConsumer(ctx, next) {
+  async save(ctx, next) {
     try {
       let data = ctx.request.body;
       data.RegistrationDate = Date.now();
       data.ObserveFrom = Date.now();
       let con = await this.exporterService.saveConsumer(data);
-      if (con) {
-        ctx.body = con;
-        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
-      } else {
-        ctx.status = 400;
-        ctx.body = { status: 400, message: `Invalid con data` };
-        createLogger.error(
-          `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
-        );
-      }
+      ctx.body = con;
+      await next();
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
@@ -59,15 +51,19 @@ module.exports = class GatewayController {
 
   async getData(ctx, next) {
     try {
-      let email = ctx.params.email;
+      let email = ctx.params.email;     
       let consumer = await this.exporterService.findByEmail(email);
-      let con = await this.exporterService.getData(consumer);
+      let data = await this.exporterService.getData(consumer);
+      if(data==null){
+        ctx.status = 404;
+        ctx.body = { status: 404, message: "No data found"};
+      }
       consumer.ObserveFrom = Date.now();
       await consumer.save()
-      ctx.body = con;
+      ctx.body = {data: con};
     } catch (err) {
-      ctx.status = 500;
-      ctx.body = { status: 500, message: err.message };
+      ctx.status = 404;
+      ctx.body = { status: 404, message: err.message };
     }
 
   }
@@ -98,11 +94,11 @@ module.exports = class GatewayController {
     }
   }
 
-  async getConsumersByName(ctx, next) {
+  async getConsumersByEmail(ctx, next) {
     try {
-      let name = ctx.params.name;
-      let consumer = await this.exporterService.findByName(name);
-      ctx.body = consumer;
+      let email=ctx.params.email;
+      let consumer = await this.exporterService.findByEmail(email);
+      ctx.body = {data: consumer};
       await next();
     } catch (err) {
       ctx.status = 404;

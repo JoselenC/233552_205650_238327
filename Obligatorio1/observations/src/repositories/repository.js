@@ -11,13 +11,11 @@ module.exports = class Repository {
 
     static async connect() {
         const databaseConfig = Config.get("repoObservation");
-        this.connection = new Sequelize(databaseConfig.database, databaseConfig.user,
-            databaseConfig.password, databaseConfig.options);
         const connection = await mysql.createConnection({ host:databaseConfig.host, port:databaseConfig.port
             , user:databaseConfig.user, password:databaseConfig.password });
         await connection.query(`CREATE DATABASE IF NOT EXISTS \`${databaseConfig.database}\`;`);
         this.connection = new Sequelize(databaseConfig.database, databaseConfig.user,
-            databaseConfig.password, databaseConfig.options);
+            databaseConfig.password, databaseConfig.options);        
     }
 
 

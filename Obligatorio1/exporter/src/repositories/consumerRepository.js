@@ -45,6 +45,16 @@ module.exports = class ConsumerRepository {
     }
   }
 
+  
+  async findByName(name) {
+    try {
+      let consumer = await Consumer.findOne({ Name: name });
+      return consumer ? consumer : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
   async login(data) {
     if (data.Password != "" && data.Email != "") {
       let password = md5(data.Password);

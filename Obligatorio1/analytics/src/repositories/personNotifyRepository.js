@@ -3,7 +3,7 @@ const PersonNotify = require('../models/personNotify')
 
 module.exports = class PersonNotifyRepository {
 
-    constructor() {      
+    constructor() {
         this.repository = new Repository();
     }
 
@@ -16,7 +16,6 @@ module.exports = class PersonNotifyRepository {
     async save(data) {
         let existing = await PersonNotify.findOne({ Email: data.Email });
         if (existing == null) {
-            data.URL= "aca iria URL única"; //TODO
             let personNotify = await PersonNotify.create(data);
             return personNotify.toObject();
         } else {
@@ -26,8 +25,7 @@ module.exports = class PersonNotifyRepository {
 
     async findByEmail(email) {
         try {
-            let personNotify = await PersonNotify.findOne({ Email: email });
-            return personNotify ? personNotify.toObject() : null;
+            return await PersonNotify.findOne({ Email: email });            
         } catch (err) {
             return null;
         }

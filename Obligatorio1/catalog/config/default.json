@@ -1,8 +1,9 @@
 {
-    "repomysql": {
-        "database": "catalogDB",
+    "repo": {
         "user": "root",
-        "password": "secret",       
+        "password": "root",
+        "database": "catalogDB",
+        "port": "3306",
         "options": {
             "host": "localhost",
             "dialect": "mysql",
@@ -13,5 +14,14 @@
                 "idle": 10000
             }
         }
-    }
+    },
+    "middlewares": {
+        "xmlParser": {
+            "xmlOptions": {
+                "explicitRoot": false,
+                "explicitArray": false
+            }
+        }
+    },
+    "port": 6065
 }

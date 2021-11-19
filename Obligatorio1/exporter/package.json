@@ -10,11 +10,16 @@
   "license": "ISC",
   "dependencies": {
     "mongoose": "^5.12.14",
+    "axios": "^0.21.1",
     "config": "^3.3.6",
-    "jsonwebtoken": "^8.5.1",
     "winston": "^3.3.3",
-    "md5": "^2.3.0",
-    "redis": "^3.1.2",
-    "redis-server": "^1.2.2"
+    "all": "0.0.0",
+    "koa": "^2.13.1",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "minimist": "^1.2.0",
+    "xml-js": "^1.6.11",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0"
   }
 }

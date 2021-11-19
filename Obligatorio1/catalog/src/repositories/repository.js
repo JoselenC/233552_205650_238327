@@ -13,7 +13,7 @@ module.exports = class Repository {
     }
 
     static async connect() {
-        const databaseConfig = Config.get("repomysql");
+        const databaseConfig = Config.get("repo");
         this.connection = new Sequelize(databaseConfig.database, databaseConfig.user,
             databaseConfig.password, databaseConfig.options);
         const connection = await mysql.createConnection({ host:databaseConfig.host, port:databaseConfig.port

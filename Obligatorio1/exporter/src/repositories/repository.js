@@ -14,7 +14,7 @@ module.exports = class Repository {
   }
 
   static getUrl() {
-    let connectionUrl = Config.get("repositoryExporter.url");
+    let connectionUrl = Config.get("repository.url");
     return connectionUrl;
   }
 

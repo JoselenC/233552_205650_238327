@@ -13,8 +13,8 @@ module.exports = class PropertyObservedService {
         return await this.propertyObservedRepository.save(data);
     }
 
-    async findByName(name) {
-        return await this.propertyObservedRepository.findByName(name);
+    async findByName(name,unit) {
+        return await this.propertyObservedRepository.findByName(name,unit);
     }
 
 }

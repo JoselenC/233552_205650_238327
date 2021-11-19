@@ -1,7 +1,8 @@
 {
-    "repositoryExporter": {
+    "repository": {
         "url": "mongodb://localhost:27017/exporter",
         "database": "exporter"
     },
-    "port":6067
+    "port":6069,
+    "timeout": 300000
 }

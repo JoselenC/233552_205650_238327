@@ -23,9 +23,9 @@ module.exports = class PropertyObservedRepository {
         }
     }
 
-    async findByName(name) {
-        try {
-            let property = await this.propertyObservedRepository.findOne({ Name: name });
+    async findByName(name,unit) {
+        try {            
+            let property = await this.propertyObservedRepository.findOne({ Name: name, Unit:unit});
             return property;
         } catch (err) {
             return null;

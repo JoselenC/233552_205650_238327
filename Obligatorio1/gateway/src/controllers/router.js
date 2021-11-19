@@ -1,86 +1,68 @@
 const Router = require("koa-router");
-
-const ExporterController = require("../../../exporter/src/controllers/exporterController");
-const AnalyticsController = require("../../../analytics/src/controllers/analyticsController");
-const PropertyObservedController = require("../../../catalog/src/controllers/propertyObservedController");
-const SensorController = require("../../../catalog/src/controllers/sensorController");
-const RankController = require("../../../catalog/src/controllers/rankController");
-const ObservationsController = require("../../../observations/src/controllers/observationsController");
-const respond = require("../middlewares/respond");
-
 const router = new Router();
-const exporterController = new ExporterController();
-const analyticsController = new AnalyticsController();
-const propertyObservedController = new PropertyObservedController();
-const sensorController = new SensorController();
-const observationsController = new ObservationsController();
-const rankController = new RankController();
+const GatewayController = require("./gatewayController");
+const gatewayController = new GatewayController();
 
 
-router.post("/gateway/consumer", (ctx, next) =>
-    exporterController.saveConsumer(ctx, next)
+router.post("/gateway/exporter/consumer", async (ctx, next) =>
+    await gatewayController.saveConsumer(ctx, next)
 );
 
-
-router.get("/gateway/exporter/consumer/:email", (ctx, next) =>
-    exporterController.getData(ctx, next)
+router.post("/gateway/analytics/person", async (ctx, next) =>
+    await gatewayController.savePerson(ctx, next)
 );
 
-router.get("/gateway/analytics/:email", (ctx, next) =>
-    analyticsController.getPersonByEmail(ctx, next)
+router.post("/gateway/catalog/property", async (ctx, next) =>
+    await gatewayController.saveProperty(ctx, next)
 );
 
-router.post("/gateway/person", (ctx, next) =>
-    analyticsController.saveAnalytics(ctx, next)
+router.post("/gateway/catalog/sensor", async (ctx, next) =>
+    await gatewayController.saveSensor(ctx, next)
 );
 
-
-router.get("/gateway/observation", (ctx, next) =>
-    observationsController.getAll(ctx, next)
+router.post("/gateway/catalog/rank", async (ctx, next) =>
+    await gatewayController.saveRank(ctx, next)
 );
 
-router.get("/gateway/property", (ctx, next) =>
-    propertyObservedController.getAll(ctx, next)
+router.get("/gateway/catalog/property", async (ctx, next) =>
+    await gatewayController.getAllProperties(ctx, next)
 );
 
-router.post("/gateway/property", (ctx, next) =>
-    observationsController.save(ctx, next)
+router.get("/gateway/catalog/sensor", async (ctx, next) =>
+    await gatewayController.getAllSensors(ctx, next)
 );
 
-
-
-
-router.post("/gateway/sensor", (ctx, next) =>
-    sensorController.save(ctx, next)
+router.get("/gateway/catalog/rank", async (ctx, next) =>
+    await gatewayController.getAllRanks(ctx, next)
 );
 
-router.post("/gateway/rank", (ctx, next) =>
-    rankController.save(ctx, next)
+router.get("/gateway/analytics/person/:email", async (ctx, next) =>
+    await gatewayController.getPersonByEmail(ctx, next)
 );
 
-router.get("/gateway/sensor", (ctx, next) =>
-    sensorController.getAll(ctx, next)
+router.get("/gateway/exporter/consumers/:email", async (ctx, next) =>
+    await gatewayController.getConsumer(ctx, next)
 );
 
 router.post("/gateway/observation", async (ctx, next) => {
-    await observationsController.saveObservation(ctx, next)
-        .then((value) => {
-            ctx.body = { data: value }
-        }).catch(function (err) {
-            ctx.status = 400;
-            ctx.body = { status: 400, message: err.message };
-        })
+    await gatewayController.saveObservation(ctx, next)
 });
 
 router.post("/gateway/observation/:esn", async (ctx, next) => {
-    await observationsController.saveObservation(ctx, next)
-        .then((value) => {
-            ctx.body = { data: value }
-        }).catch(function (err) {
-            ctx.status = 400;
-            ctx.body = { status: 400, message: err.message };
-        })
-
+    await gatewayController.saveObservation(ctx, next)
 });
+
+router.get("/gateway/observations", async (ctx, next) =>
+    await gatewayController.getAll(ctx, next)
+);
+
+router.get("/gateway/analytics/averages/:criterion", async (ctx, next) =>
+   await gatewayController.calculateAverageValues(ctx, next)
+);
+
+router.get("/gateway/exporter/consumer/:email", async (ctx, next) =>
+    await gatewayController.getData(ctx, next)
+);
+
 
 module.exports = router;
