@@ -1,6 +1,8 @@
 const { data } = require("../../../logger/log");
 const ObservationService = require("../../../observations/src/services/observationService");
 const AnalyticsService = require("../services/analyticsService");
+const axios = require("axios");
+
 
 module.exports = class AnalyticsController {
   constructor() {
@@ -24,7 +26,7 @@ module.exports = class AnalyticsController {
     try {
       let email = ctx.params.email;
       let person = await this.analyticsService.findByEmail(email);
-      ctx.body = person;
+      ctx.body = { data: person };
       await next();
     } catch (err) {
       ctx.status = 404;
@@ -32,10 +34,29 @@ module.exports = class AnalyticsController {
     }
   }
 
+  async observationsByDate(data) {
+    return new Promise(async (resolve, reject) => {
+      return axios
+        .put(`http://localhost:6067/observations/propertyObserved`, data)
+        .then((response) => {
+          if (response.data.data === undefined || response.data.length === 0) {
+            reject(new Error("No data found"));
+          } else {
+            console.log(response.data)
+            resolve(response.data);
+          }
+        })
+        .catch((error) => {
+          reject(new Error(error.message));
+        });
+    });
+  }
+
   async calculateAverageValues(ctx, next) {
     try {
       let data = ctx.request.body;
-      let observations = await this.observationService.findPropertiesByDateAndSensor(data);
+      let observations = await this.observationsByDate(data)
+      console.log(observations)
       if (observations != null)
         observations.sort((a, b) => new Date(a.fechas).getTime() < new Date(b.fechas).getTime());
       else {
@@ -43,12 +64,12 @@ module.exports = class AnalyticsController {
         ctx.body = { status: 404, message: "There are no observations for those data" };
       }
       let dailyAverage
-      let criterion=ctx.params.criterion.toLowerCase();
+      let criterion = ctx.params.criterion.toLowerCase();
       if (criterion == "day" || criterion == "days")
         dailyAverage = await this.analyticsService.calculateDailyAverage(observations, data);
       else if (criterion == "month" || criterion == "months")
         dailyAverage = await this.analyticsService.calculateMonthlyAverage(observations, data);
-      else if (criterion== "year" || criterion == "years")
+      else if (criterion == "year" || criterion == "years")
         dailyAverage = await this.analyticsService.calculateAnnualAverage(observations, data);
       else {
         ctx.status = 404;
@@ -57,6 +78,7 @@ module.exports = class AnalyticsController {
       ctx.body = { data: dailyAverage }
       await next();
     } catch (err) {
+      console.log(err.message)
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
     }

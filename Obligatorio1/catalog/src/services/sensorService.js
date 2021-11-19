@@ -1,3 +1,4 @@
+const { estimatedDocumentCount } = require('../../../exporter/src/models/consumer');
 const SensorRepository = require('../repositories/sensorRepository');
 
 module.exports = class SensorService {
@@ -19,8 +20,9 @@ module.exports = class SensorService {
         }
     }
 
-    async existSensorProperty(sensor, propertyName) {
+    async existSensorProperty(propertyName) {
         try {
+            var sensor = await this.findByEsn(esn);
             var exist = false;
             sensor.propertiesObserved.forEach(element => {
                 if (element.name == propertyName) {

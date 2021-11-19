@@ -17,7 +17,7 @@ module.exports = class RankService {
         return await this.rankRepository.findByName(name);
     }
 
-    async findByProperty(propertyName) {
-        return await this.rankRepository.findByProperty(propertyName);
+    async findByProperty(property) {
+        return await this.rankRepository.findByProperty(property);
     }
 }

@@ -7,7 +7,8 @@ const convertFilter = async (input, next) => {
     const unit = input.unit;
     const name = input.name;
     const esn = input.ESN;
-    const property = await observarionService.sensorProperty(esn, name)
+    var property;
+    await observarionService.sensorProperty(input, next).then((result) => property=result.data)
     .catch(function () {
       throw new Error("Property does not exist");
     })

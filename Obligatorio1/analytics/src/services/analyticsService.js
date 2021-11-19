@@ -1,7 +1,7 @@
 const PersonNotifyRepository = require("../repositories/personNotifyRepository");
 const RankService = require("../../../catalog/src/services/rankService");
 const nodemailer = require("nodemailer");
-
+const axios = require("axios");
 
 module.exports = class AnalyticsService {
 
@@ -50,7 +50,22 @@ module.exports = class AnalyticsService {
     }
 
     async isValidData(data) {
-        const rank = await this.rankService.findByProperty(data.name);
+        var rank;
+        await new Promise(async (resolve, reject) => {
+            return axios
+                .get(`http://localhost:6065/catalog/rank/${data.name}/${data.standarizedUnit}`, data)
+                .then((response) => {
+                    if (response.data.data === undefined || response.data.length === 0) {
+                        reject(new Error(""));
+                    } else {
+                        resolve(response.data.data)
+                        rank = response.data.data
+                    }
+                })
+                .catch((error) => {
+                    reject(new Error(error.message));
+                });
+        });
         if (data.standarizedData > rank.finalValue || data.standarizedData < rank.initialValue) {
             await this.sendMail(data.name);
             return false;

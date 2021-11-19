@@ -27,10 +27,9 @@ module.exports = class RankRepository {
         }
     }
 
-    async findByProperty(propertyName) {
+    async findByProperty(property) {
         try {
-            let property = await this.propertyObservedRepository.findByName(propertyName)
-            let rank = await this.rankRepository.findOne({ Property: property.dataValues, 
+            let rank = await this.rankRepository.findOne({ Property: property, 
                 include: this.relations });
             return rank;
         } catch (err) {
