@@ -46,7 +46,7 @@ module.exports = class ObservationRepository {
             let startDate = ctx.request.body.startDate;
             let endDate = ctx.request.body.endDate;
             let propertyObserved = ctx.request.body.propertyObserved;
-            let esn = ctx.request.body.ESN;
+            let esn = ctx.request.body.sensor.ESN;
             let observations = await this.observationRepository.findAll()
             let filteredObservations = [];
             observations.forEach(element => {
@@ -58,8 +58,7 @@ module.exports = class ObservationRepository {
                         filteredObservations.push(element);
                     }
                 }
-            });
-            console.log(observations)
+            });                  
             return filteredObservations
         }
         catch (err) {

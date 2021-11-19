@@ -81,8 +81,8 @@ module.exports = class AnalyticsService {
         let endDate = data.endDate;
         let startDay = new Date(startDate).getUTCDate();
         let finalDay = new Date(endDate).getUTCDate();
-        let count = 0;
-        let countDays = 0;
+        let count = 1;
+        let countDays = 1;
         let avergaeDay = [];
         let average = 0;
         let first = false;
@@ -94,25 +94,26 @@ module.exports = class AnalyticsService {
                 startDay = startDay + 1
                 countDays = countDays + 1;
             }
-            if (startDay <= finalDay) {
+            else if (new Date(element.registrationDate).getUTCDate() == startDay) {
                 first = true;
-                if (new Date(element.registrationDate).getUTCDate() == startDay) {
-                    average += parseFloat(element.standarizedData);
-                    count = count + 1;
-                }
-                else {
-                    avergaeDay.push({ day: countDays, average: average / count })
-                    startDay = startDay + 1;
-                    countDays = countDays + 1;
-                    count = 0;
-                    average = 0;
-                }
+                average += parseFloat(element.standarizedData);
+                count = count + 1;
+            }
+            else {
+                avergaeDay.push({ day: countDays, average: average / count })
+                startDay = startDay + 1;
+                countDays = countDays + 1;
+                count = 1;
+                average = 0;
             }
         });
-        if (countDays == (finalDay - startDay) + 1)
+        while (finalDay >= startDay) {
             avergaeDay.push({ day: countDays, average: average / count })
-        else if (finalDay == startDay)
-            avergaeDay.push({ day: 1, average: average / count })
+            startDay = startDay + 1;
+            countDays = countDays + 1;
+            count = 1;
+            average = 0;
+        }
         return avergaeDay;
     }
 
@@ -121,7 +122,7 @@ module.exports = class AnalyticsService {
         let endDate = data.endDate;
         let startMonth = new Date(startDate).getMonth();
         let finalMonth = new Date(endDate).getMonth();
-        let count = 0;
+        let count = 1;
         let countMonth = 1;
         let averageMonth = [];
         let average = 0;
@@ -134,25 +135,27 @@ module.exports = class AnalyticsService {
                 startMonth = startMonth + 1
                 countMonth = countMonth + 1;
             }
-            if (startMonth <= finalMonth) {
+            else if (new Date(element.registrationDate).getMonth() == startMonth) {
                 first = true;
-                if (new Date(element.registrationDate).getMonth() == startMonth) {
-                    average += parseFloat(element.standarizedData);
-                    count = count + 1;
-                }
-                else {
-                    averageMonth.push({ Month: countMonth, average: average / count })
-                    startMonth = startMonth + 1;
-                    countMonth = countMonth + 1;
-                    count = 0;
-                    average = 0;
-                }
+                average += parseFloat(element.standarizedData);
+                count = count + 1;
             }
+            else {
+                averageMonth.push({ Month: countMonth, average: average / count })
+                startMonth = startMonth + 1;
+                countMonth = countMonth + 1;
+                count = 1;
+                average = 0;
+            }
+
         });
-        if (countMonth == (finalMonth - startMonth))
+        while (finalMonth >= startMonth) {
             averageMonth.push({ Month: countMonth, average: average / count })
-        else if (finalMonth == startMonth)
-            averageMonth.push({ Month: 1, average: average / count })
+            startMonth = startMonth + 1;
+            countMonth = countMonth + 1;
+            count = 1;
+            average = 0;
+        }
         return averageMonth;
     }
 
@@ -174,25 +177,27 @@ module.exports = class AnalyticsService {
                 startYear = startYear + 1
                 countYears = countYears + 1;
             }
-            if (startYear <= finalYear) {
+            if (new Date(element.registrationDate).getFullYear() == startYear) {
                 first = true;
-                if (new Date(element.registrationDate).getFullYear() == startYear) {
-                    average += parseFloat(element.standarizedData);
-                    count = count + 1;
-                }
-                else {
-                    avergaeYear.push({ year: countYears, average: average / count })
-                    startYear = startYear + 1;
-                    countYears = countYears + 1;
-                    count = 0;
-                    average = 0;
-                }
+
+                average += parseFloat(element.standarizedData);
+                count = count + 1;
+            }
+            else {
+                avergaeYear.push({ year: countYears, average: average / count })
+                startYear = startYear + 1;
+                countYears = countYears + 1;
+                count = 1;
+                average = 0;
             }
         });
-        if (countYears == (finalYear - startYear))
+        while (finalYear >= startYear) {
             avergaeYear.push({ year: countYears, average: average / count })
-        else if (finalYear == startYear)
-            avergaeYear.push({ year: 1, average: average / count })
+            startYear = startYear + 1;
+            countYears = countYears + 1;
+            count = 1;
+            average = 0;
+        }
         return avergaeYear;
     }
 
