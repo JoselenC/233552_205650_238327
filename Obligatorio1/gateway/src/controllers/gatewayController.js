@@ -1,4 +1,5 @@
 const GatewayService = require("../services/gatewayService");
+const log = require("../../../logger/log");
 
 module.exports = class GatewayController {
   constructor() {
@@ -14,6 +15,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -26,6 +30,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -38,6 +45,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -50,6 +60,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -62,6 +75,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -74,6 +90,9 @@ module.exports = class GatewayController {
       }).catch(function (err) {
         ctx.status = 404;
         ctx.body = { status: 404, message: err.message };
+        log.error(
+          `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+        );
       })
   }
   
@@ -87,6 +106,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -98,6 +120,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -109,6 +134,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -120,6 +148,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -131,6 +162,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
   
@@ -142,6 +176,9 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 
@@ -153,6 +190,33 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
+    }
+  }
+
+  async login(ctx, next) {
+    try {
+      let data = ctx.request.body;
+      let consumer = await this.gatewayService.login(data);
+      if (consumer) {
+        ctx.set("Authorization", consumer);
+        ctx.body = consumer;
+        log.info(`${ctx.request.method} on url ${ctx.request.url}`);
+      } else {
+        ctx.status = 400;
+        ctx.body = { status: 400, message: "Invalid consume" };
+        log.error(
+          `Invalid consumer on url ${ctx.request.url} -> ${ctx.body.message}`
+        );
+      }
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
     }
   }
 };

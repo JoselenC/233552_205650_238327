@@ -21,11 +21,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6069/exporter/consumer`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -36,11 +34,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6061/analytics/person`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -51,11 +47,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6061/analytics/averages/${criterion}`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -66,11 +60,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/sensor`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -81,11 +73,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/property`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -96,11 +86,9 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/rank`, data)
         .then((response) => {
-          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
-          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -211,7 +199,20 @@ module.exports = class GatewayService {
     });
   }
 
-
+  async login(ctx) {
+    return new Promise(async (resolve, reject) => {
+      return axios
+        .post(`http://localhost:6069/exporter/login`, ctx)
+        .then((response) => {
+          ctx.body = { data: response.data };
+          resolve(response.data);
+        })
+        .catch((error) => {
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
+        });
+    });
+  }
 
 
 

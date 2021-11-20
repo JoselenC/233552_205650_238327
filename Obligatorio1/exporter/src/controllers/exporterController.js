@@ -1,5 +1,5 @@
 const ExporterService = require("../services/exporterService");
-const createLogger = require("../../../logger/log");
+const log = require("../../../logger/log");
 const axios = require("axios");
 
 
@@ -13,21 +13,12 @@ module.exports = class GatewayController {
     try {
       let data = ctx.request.body;
       let consumer = await this.exporterService.login(data);
-      if (consumer) {
-        ctx.set("Authorization", consumer);
         ctx.body = consumer;
-        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
-      } else {
-        ctx.status = 400;
-        ctx.body = { status: 400, message: `Invalid consumer data` };
-        createLogger.error(
-          `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
-        );
-      }
+        log.info(`${ctx.request.method} on url ${ctx.request.url}`);
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
-      createLogger.error(
+      log.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
       );
     }
@@ -45,7 +36,7 @@ module.exports = class GatewayController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
-      createLogger.error(
+      log.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
       );
     }
