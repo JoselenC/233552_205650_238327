@@ -5,8 +5,8 @@ const ObservationController = require("./observationsController");
 const router = new Router();
 const observationController = new ObservationController();
 
-router.get("/observations/consumer", async (consumer, next) => {
-  await observationController.findAllByConsumer(consumer, next)
+router.get("/observations/consumer/:observeFrom", async (ctx, next) => {
+  await observationController.findAllByConsumer(ctx)
 }
 );
 

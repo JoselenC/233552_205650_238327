@@ -60,9 +60,5 @@ router.get("/gateway/analytics/averages/:criterion", async (ctx, next) =>
    await gatewayController.calculateAverageValues(ctx, next)
 );
 
-router.get("/gateway/exporter/consumer/:email", async (ctx, next) =>
-    await gatewayController.getData(ctx, next)
-);
-
 
 module.exports = router;

@@ -25,16 +25,22 @@ module.exports = class SensorController {
     }
 
     async sensorProperty(ctx, next) {
-        let esn = ctx.params.esn;
-        let propertyName = ctx.params.name;
-        let sensor = await this.catalogService.sensorProperty(esn, propertyName);
-        if (sensor) {
-            ctx.body = { data: sensor };
-        } else {
+        try {
+            let esn = ctx.params.esn;
+            let propertyName = ctx.params.name;
+            let sensor = await this.catalogService.sensorProperty(esn, propertyName);
+            if (sensor) {
+                ctx.body = { data: sensor };
+            } else {
+                ctx.status = 404;
+                ctx.body = { status: 404, message: `sensor not found` };
+            }
+            await next();
+        }
+        catch (error) {
             ctx.status = 404;
             ctx.body = { status: 404, message: `sensor not found` };
         }
-        await next();
     }
 
     async existSensorProperty(ctx, next) {
@@ -57,14 +63,20 @@ module.exports = class SensorController {
     }
 
     async findByName(ctx, next) {
-        let name = ctx.params.name;
-        let sensor = await this.catalogService.findByName(name);
-        if (sensor) {
-            ctx.body = { data: sensor };;
-        } else {
+        try {
+            let name = ctx.params.name;
+            let sensor = await this.catalogService.findByName(name);
+            if (sensor) {
+                ctx.body = { data: sensor };;
+            } else {
+                ctx.status = 404;
+                ctx.body = { status: 404, message: `sensor not found` };
+            }
+            await next();
+        }
+        catch (error) {
             ctx.status = 404;
             ctx.body = { status: 404, message: `sensor not found` };
         }
-        await next();
     }
 }

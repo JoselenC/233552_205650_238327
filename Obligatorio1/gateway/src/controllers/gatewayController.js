@@ -145,17 +145,6 @@ module.exports = class GatewayController {
     }
   }
 
-  async getData(ctx, next) {
-    try {
-      let data = await this.gatewayService.getData(ctx);
-      ctx.body = data;
-      await next();
-    } catch (err) {
-      ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
-    }
-  }
-
   async getAll(ctx, next) {
     try {
       let data = await this.gatewayService.getAll(ctx);
@@ -166,7 +155,4 @@ module.exports = class GatewayController {
       ctx.body = { status: 400, message: err.message };
     }
   }
-
-
-
 };

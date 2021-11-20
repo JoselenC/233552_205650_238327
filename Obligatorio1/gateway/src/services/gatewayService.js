@@ -196,23 +196,6 @@ module.exports = class GatewayService {
     });
   }
 
-  async getData(ctx) {
-    return new Promise(async (resolve, reject) => {
-      return axios
-        .get(`http://localhost:6069/exporter/consumer/${ctx.params.email}`, ctx)
-        .then((response) => {
-          ctx.body = { data: response.data };
-          resolve(response.data);
-        })
-        .catch((error) => {
-          ctx.body = { data: error.message };
-          reject(new Error(error.message));
-        });
-    });
-  }
-
-
-
   async getPersonByEmail(ctx) {
     return new Promise(async (resolve, reject) => {
       return axios

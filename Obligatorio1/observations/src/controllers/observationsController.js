@@ -76,8 +76,16 @@ module.exports = class GatewayController {
     next();
   }
 
-  async findAllByConsumer(consumer) {
-    return await this.observationService.findAllByConsumer(consumer) || [];
+  async findAllByConsumer(ctx) {
+    try {
+      let list = await this.observationService.findAllByConsumer(ctx);
+      ctx.body = list;
+    }
+    catch (err) {
+      ctx.status = 400;
+      ctx.body = { status: 400, message: err.message };
+    }
+  
   }
 
   async findPropertiesByDateAndSensor(ctx, next) {
