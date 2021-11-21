@@ -1,0 +1,6 @@
+{
+    "repositoryEmulator": {
+        "url": "mongodb://localhost:27017/emulator",
+        "database": "emulator"
+    }
+}
