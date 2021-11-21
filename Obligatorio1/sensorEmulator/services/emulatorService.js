@@ -16,8 +16,8 @@ module.exports = {
 
 function sendData(info,url,port){
     axios.post(`http://${url}:${port}/gateway/observation/${info.ESN}`, {
-        ESN: info.ESN,
-        observedProperty: info.observedProperty,
+        name: info.name,
+        unit: info.unit,
         value: info.value
     })
         .then(res => {
