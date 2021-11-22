@@ -41,26 +41,50 @@ module.exports = class GatewayService {
         });
     });
   }
+  
 
-  async calculateAverageValues(data, criterion) {
+
+  async calculateAverageValues(ctx) {
+    let data = ctx.request.body;
+    let criterion = ctx.params.criterion;
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6061/analytics/averages/${criterion}`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
 
-  async saveSensor(data) {
+  async saveSensor(ctx) {    
+    let data = ctx.request.body;
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/sensor`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
+        })
+        .catch((error) => {
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
+        });
+    });
+  }
+
+  async authentication(ctx){
+    return await new Promise(async (resolve, reject) => {
+      return axios
+        .post(`http://localhost:6063/authentication`, ctx)
+        .then((response1) => {
+           resolve(response1)
         })
         .catch((error) => {
           reject(new Error(error.message));
@@ -68,36 +92,49 @@ module.exports = class GatewayService {
     });
   }
 
-  async saveProperty(data) {
-    return new Promise(async (resolve, reject) => {
+  async saveProperty(ctx) {
+    let data = ctx.request.body;
+    await this.authentication(ctx)
+    return await new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/property`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
+
   }
 
-  async saveRank(data) {
+  async saveRank(ctx) {    
+    let data = ctx.request.body;
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/rank`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
 
-  async saveObservation(ctx, esn) {
+
+  async saveObservation(ctx) {
+    let data = ctx.request.body;
+    let esn = ctx.params.esn;
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
-        .post(`http://localhost:6067/observations/${esn}`, ctx)
+        .post(`http://localhost:6067/observations/${esn}`, data)
         .then((response) => {
           ctx.body = { data: response.data };
           resolve(response.data);
@@ -125,6 +162,7 @@ module.exports = class GatewayService {
   }
 
   async getAllProperties(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/property`, ctx)
@@ -140,6 +178,7 @@ module.exports = class GatewayService {
   }
 
   async getAllSensors(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/sensor`, ctx)
@@ -155,6 +194,7 @@ module.exports = class GatewayService {
   }
 
   async getAllRanks(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/rank`, ctx)
@@ -170,6 +210,7 @@ module.exports = class GatewayService {
   }
 
   async getConsumers(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6069/exporter/consumers/${ctx.params.email}`, ctx)
@@ -214,7 +255,20 @@ module.exports = class GatewayService {
     });
   }
 
-
+  async deletePerson(ctx) {
+    return new Promise(async (resolve, reject) => {
+      return axios
+        .post(`http://localhost:6061/analytics/person/${ctx.params.email}`, ctx)
+        .then((response) => {
+          ctx.body = { data: response.data };
+          resolve(response.data);
+        })
+        .catch((error) => {
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
+        });
+    });
+  }
 
 
 };

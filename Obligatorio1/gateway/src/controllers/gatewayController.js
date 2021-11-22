@@ -36,10 +36,23 @@ module.exports = class GatewayController {
     }
   }
 
+  async deletePerson(ctx, next) {
+    try {
+      let message = await this.gatewayService.deletePerson(ctx)
+      ctx.body = {data: message};
+      await next();
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
+    }
+  }
+
   async saveSensor(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveSensor(data)
+      let message = await this.gatewayService.saveSensor(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {
@@ -53,8 +66,7 @@ module.exports = class GatewayController {
 
   async saveProperty(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveProperty(data)
+      let message = await this.gatewayService.saveProperty(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {
@@ -68,8 +80,7 @@ module.exports = class GatewayController {
 
   async saveRank(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveRank(data)
+      let message = await this.gatewayService.saveRank(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {
@@ -82,9 +93,7 @@ module.exports = class GatewayController {
   }
 
   async saveObservation(ctx, next) {
-      let data = ctx.request.body;
-      let esn = ctx.params.esn;
-      await this.gatewayService.saveObservation(data,esn)    
+      await this.gatewayService.saveObservation(ctx)    
       .then((value) => {
         ctx.body = { data: value }
       }).catch(function (err) {
@@ -98,9 +107,7 @@ module.exports = class GatewayController {
   
   async calculateAverageValues(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let criterion = ctx.params.criterion;
-      let average = await this.gatewayService.calculateAverageValues(data,criterion);
+      let average = await this.gatewayService.calculateAverageValues(ctx);
       ctx.body = average;
       await next();
     } catch (err) {
@@ -199,21 +206,21 @@ module.exports = class GatewayController {
   async login(ctx, next) {
     try {
       let data = ctx.request.body;
-      let consumer = await this.gatewayService.login(data);
-      if (consumer) {
-        ctx.set("Authorization", consumer);
-        ctx.body = consumer;
+      let token = await this.gatewayService.login(data);
+      if (token) {
+        ctx.set("Authentication", token);
+        ctx.body = token;
         log.info(`${ctx.request.method} on url ${ctx.request.url}`);
       } else {
         ctx.status = 400;
         ctx.body = { status: 400, message: "Invalid consume" };
         log.error(
-          `Invalid consumer on url ${ctx.request.url} -> ${ctx.body.message}`
+          `Invalid consumer on url ${ctx.request.url} -> ${err.message}`
         );
       }
     } catch (err) {
       ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
+      ctx.body = { status: 400, message: err.message};
       log.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
       );
