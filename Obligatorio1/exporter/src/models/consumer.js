@@ -14,7 +14,13 @@ const Consumer = mongoose.model(
     },
     Password: { type: String, required: [true, 'Conumer Password is required'] },
     ObserveFrom: Date,
-  })
+    facebook:{
+      id:String,
+      token:String,
+      email:String
+    }
+  }
+  )
 );
 
 module.exports = Consumer;

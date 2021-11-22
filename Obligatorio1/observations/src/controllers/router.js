@@ -5,8 +5,8 @@ const ObservationController = require("./observationsController");
 const router = new Router();
 const observationController = new ObservationController();
 
-router.get("/observations/consumer", async (consumer, next) => {
-  await observationController.findAllByConsumer(consumer, next)
+router.get("/observations/consumer/:observeFrom", async (ctx, next) => {
+  await observationController.findAllByConsumer(ctx)
 }
 );
 
@@ -22,8 +22,8 @@ router.post("/observations/:esn", async (ctx, next) => {
       return value
     }).catch(function (err) {
       ctx.status = 400;
+      console.log(err.message)
       ctx.body = { status: 400, message: err.message };
-      throw new Error(err.message)
     })
 }
 );
