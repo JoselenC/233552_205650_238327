@@ -41,6 +41,7 @@ module.exports = class GatewayService {
         });
     });
   }
+  
 
 
   async calculateAverageValues(ctx) {
@@ -254,7 +255,20 @@ module.exports = class GatewayService {
     });
   }
 
-
+  async deletePerson(ctx) {
+    return new Promise(async (resolve, reject) => {
+      return axios
+        .post(`http://localhost:6061/analytics/person/${ctx.params.email}`, ctx)
+        .then((response) => {
+          ctx.body = { data: response.data };
+          resolve(response.data);
+        })
+        .catch((error) => {
+          ctx.body = { data: error.message };
+          reject(new Error(error.message));
+        });
+    });
+  }
 
 
 };

@@ -36,6 +36,20 @@ module.exports = class GatewayController {
     }
   }
 
+  async deletePerson(ctx, next) {
+    try {
+      let message = await this.gatewayService.deletePerson(ctx)
+      ctx.body = {data: message};
+      await next();
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = { status: 400, message: err.message };
+      log.error(
+        `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
+      );
+    }
+  }
+
   async saveSensor(ctx, next) {
     try {
       let message = await this.gatewayService.saveSensor(ctx)

@@ -6,7 +6,13 @@ const router = new Router();
 const analyticsController = new AnalyticsController();
 
 router.post("/analytics/person", async (ctx, next) => 
-  await analyticsController.saveAnalytics(ctx, next)
+  await analyticsController.savePerson(ctx, next)
+);
+
+
+router.post("/analytics/person/:email", async (ctx, next) => {
+  await analyticsController.deletePerson(ctx, next)
+}
 );
 
 router.get("/analytics/person/:email", async (ctx, next) => {
