@@ -14,21 +14,15 @@ module.exports = class SensorController {
     }
 
     async save(ctx, next) {
-        try {
-            let data = ctx.request.body;
-            let property = await this.propertyObservedService.save(data);
-            if (property) {
-                ctx.body = { data: property };
-            } else {
-                ctx.status = 500;
-                ctx.body = { status: 500, message: `Invalid property observed data` };
-            }
-            await next();
+        let data = ctx.request.body;
+        let property = await this.propertyObservedService.save(data);
+        if (property) {
+            ctx.body = { data: property };
+        } else {
+            ctx.status = 500;
+            ctx.body = { status: 500, message: `Invalid property observed data` };
         }
-        catch (error) {
-            ctx.status = 404;
-            ctx.body = { status: 404, message: `sensor not found` };
-        }
+        await next();
     }
 
     async findByName(ctx, next) {
