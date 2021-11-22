@@ -199,21 +199,21 @@ module.exports = class GatewayController {
   async login(ctx, next) {
     try {
       let data = ctx.request.body;
-      let consumer = await this.gatewayService.login(data);
-      if (consumer) {
-        ctx.set("Authorization", consumer);
-        ctx.body = consumer;
+      let token = await this.gatewayService.login(data);
+      if (token) {
+        ctx.set("Authentication", token);
+        ctx.body = token;
         log.info(`${ctx.request.method} on url ${ctx.request.url}`);
       } else {
         ctx.status = 400;
         ctx.body = { status: 400, message: "Invalid consume" };
         log.error(
-          `Invalid consumer on url ${ctx.request.url} -> ${ctx.body.message}`
+          `Invalid consumer on url ${ctx.request.url} -> ${err.message}`
         );
       }
     } catch (err) {
       ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
+      ctx.body = { status: 400, message: err.message};
       log.error(
         `${ctx.request.method} on url ${ctx.request.url} -> ${err.message}`
       );

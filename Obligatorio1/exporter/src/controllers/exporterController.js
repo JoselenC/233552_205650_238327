@@ -32,7 +32,6 @@ module.exports = class GatewayController {
       data.ObserveFrom = Date.now();
       let con = await this.exporterService.saveConsumer(data);
       ctx.body = con;
-      await next();
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
