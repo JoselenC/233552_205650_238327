@@ -20,7 +20,8 @@
     "md5": "^2.3.0",
     "minimist": "^1.2.0",
     "mongoose": "^5.12.14",
-    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.5.0",
+    "passport-facebook": "^3.0.0",
     "winston": "^3.3.3",
     "xml-js": "^1.6.11"
   }

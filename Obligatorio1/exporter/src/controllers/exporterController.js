@@ -1,5 +1,5 @@
 const ExporterService = require("../services/exporterService");
-const log = require("../../../logger/log");
+const log = require("../logger/log");
 const axios = require("axios");
 
 
@@ -9,12 +9,12 @@ module.exports = class GatewayController {
     this.secret = process.env.TOKEN_SECRET;
   }
 
-  async login(ctx, next) {
+  async login(ctx) {
     try {
       let data = ctx.request.body;
-      let consumer = await this.exporterService.login(data);
-        ctx.body = consumer;
-        log.info(`${ctx.request.method} on url ${ctx.request.url}`);
+      let token = await this.exporterService.login(data);
+      ctx.body = { token: token };
+      log.info(`${ctx.request.method} on url ${ctx.request.url}`);
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
@@ -49,7 +49,7 @@ module.exports = class GatewayController {
       let list = await this.getObservationsData(consumer);
       consumer.ObserveFrom = Date.now();
       await consumer.save()
-      ctx.body = { data:list.data };
+      ctx.body = { data: list.data };
       return list
     } catch (err) {
       console.log(err.message)
@@ -72,32 +72,6 @@ module.exports = class GatewayController {
     });
   }
 
-  async getData2(ctx, next) {
-    try {
-      let decode = decodeJwt(ctx.get("Authorization"), this.secret);
-      console.log(decode)
-      let data = ctx.request.body;
-      let con = await this.exporterService.getData();
-      if (con) {
-        ctx.body = con;
-        createLogger.info(`${ctx.request.method} on url ${ctx.request.url}`);
-
-      } else {
-        ctx.status = 400;
-        ctx.body = { status: 400, message: "No permission" };
-        createLogger.error(
-          `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
-        );
-      }
-    } catch (err) {
-      ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
-      createLogger.error(
-        `${ctx.request.method} on url ${ctx.request.url} -> ${ctx.body.message}`
-      );
-    }
-  }
-
   async getConsumersByEmail(ctx, next) {
     try {
       let email = ctx.params.email;
@@ -111,10 +85,3 @@ module.exports = class GatewayController {
   }
 };
 
-function decodeJwt(token, secret) {
-  if (token == "") {
-    throw new Error("You need to be logged-in");
-  } else {
-    return jwt.verify(token, secret);
-  }
-}

@@ -1,7 +1,7 @@
 const ObservationService = require("../services/observationService");
 const Pipeline = require('../../pipeline/pipeline');
 const pipeline = new Pipeline();
-const log = require("../../../logger/log");
+const log = require("../logger/log");
 
 
 var convertFilter = async (input, next) => {

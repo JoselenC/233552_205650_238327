@@ -59,7 +59,6 @@ module.exports = class ConsumerRepository {
     try {
       if (data.Password != "" && data.Email != "") {
         let password = md5(data.Password);
-        console.log(password + "  " + data.Email)
         var consumer;
         let consumers = await Consumer.find();
         consumers.forEach(element => {
@@ -67,7 +66,6 @@ module.exports = class ConsumerRepository {
             consumer = element
           }
         });
-        console.log(process.env.JWT_SECRET)
         const token = jwt.sign(
           {
             Name: consumer.Name,

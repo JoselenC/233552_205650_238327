@@ -1,4 +1,4 @@
-const { data } = require("../../../logger/log");
+
 const ObservationService = require("../../../observations/src/services/observationService");
 const AnalyticsService = require("../services/analyticsService");
 const axios = require("axios");

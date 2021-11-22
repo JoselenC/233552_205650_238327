@@ -1,5 +1,5 @@
 const GatewayService = require("../services/gatewayService");
-const log = require("../../../logger/log");
+const log = require("../logger/log");
 
 module.exports = class GatewayController {
   constructor() {
