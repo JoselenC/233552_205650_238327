@@ -10,7 +10,7 @@ module.exports = class AnalyticsController {
     this.analyticsService = new AnalyticsService();
   }
 
-  async saveAnalytics(ctx, next) {
+  async savePerson(ctx, next) {
     try {
       let data = ctx.request.body;
       let person = await this.analyticsService.save(data);
@@ -19,6 +19,18 @@ module.exports = class AnalyticsController {
     } catch (err) {
       ctx.status = 400;
       ctx.body = { status: 400, message: err.message };
+    }
+  }
+
+  async deletePerson(ctx, next) {
+    try {
+      let email = ctx.params.email;
+      let person = await this.analyticsService.delete(email);
+      ctx.body = { data: "delete person"+ email };
+      await next();
+    } catch (err) {
+      ctx.status = 404;
+      ctx.body = { status: 404, message: err.message };
     }
   }
 
@@ -55,7 +67,6 @@ module.exports = class AnalyticsController {
     try {
       let data = ctx.request.body;
       let observations = await this.observationsByDate(data)
-      console.log(observations)
       if (observations != null)
         observations.data.sort((a, b) => new Date(a.fechas).getTime() < new Date(b.fechas).getTime());
       else {

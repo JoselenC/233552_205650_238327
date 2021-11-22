@@ -12,6 +12,10 @@ router.post("/gateway/analytics/person", async (ctx, next) =>
     await gatewayController.savePerson(ctx, next)
 );
 
+router.delete("/gateway/analytics/person/:email", async (ctx, next) =>
+    await gatewayController.deletePerson(ctx, next)
+);
+
 router.post("/gateway/catalog/property", async (ctx, next) =>
     await gatewayController.saveProperty(ctx, next)
 );

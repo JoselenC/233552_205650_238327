@@ -30,4 +30,13 @@ module.exports = class PersonNotifyRepository {
             return null;
         }
     }
+
+    async delete(email) {
+        let person = await PersonNotify.deleteOne({ Email: email });
+        if (person) {
+          return true;
+        } else {
+          throw new Error("Person does not exist");
+        }
+      }
 }

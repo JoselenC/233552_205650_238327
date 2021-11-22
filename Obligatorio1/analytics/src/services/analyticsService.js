@@ -14,9 +14,14 @@ module.exports = class AnalyticsService {
         return await this.personNotifyRepository.save(data);
     }
 
+    async delete(email) {
+        return await this.personNotifyRepository.delete(email);
+    }
+
     async findByEmail(email) {
         return await this.personNotifyRepository.findByEmail(email);
     }
+
 
     async sendMail(message) {
         let persons = await this.personNotifyRepository.getAll();
