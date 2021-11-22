@@ -11,16 +11,22 @@ module.exports = class SensorController {
         await next();
     }
 
-    async save (ctx, next) {
-        let data = ctx.request.body;
-        let rank = await this.rankService.save(data);
-        if (rank) {
-            ctx.body = rank;
-        } else {
-            ctx.status = 500;
-            ctx.body = { status: 500, message: `Invalid rank data` };
+    async save(ctx, next) {
+        try {
+            let data = ctx.request.body;
+            let rank = await this.rankService.save(data);
+            if (rank) {
+                ctx.body = rank;
+            } else {
+                ctx.status = 500;
+                ctx.body = { status: 500, message: `Invalid rank data` };
+            }
+            await next();
         }
-        await next();
+        catch (error) {
+            ctx.status = 404;
+            ctx.body = { status: 404, message: `sensor not found` };
+        }
     }
 
 

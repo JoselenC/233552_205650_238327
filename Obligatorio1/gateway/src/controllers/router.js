@@ -49,7 +49,7 @@ router.post("/gateway/observation", async (ctx, next) => {
 });
 
 router.post("/gateway/observation/:esn", async (ctx, next) => {
-    await gatewayController.saveObservation(ctx, next)
+    await gatewayController.saveObservation(ctx, next)    
 });
 
 router.get("/gateway/observations", async (ctx, next) =>
@@ -60,9 +60,8 @@ router.get("/gateway/analytics/averages/:criterion", async (ctx, next) =>
    await gatewayController.calculateAverageValues(ctx, next)
 );
 
-router.get("/gateway/exporter/consumer/:email", async (ctx, next) =>
-    await gatewayController.getData(ctx, next)
+router.post("/gateway/login", async (ctx, next) =>
+  await gatewayController.login(ctx, next)
 );
-
 
 module.exports = router;

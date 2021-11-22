@@ -4,15 +4,15 @@ const observarionService = new ObservationService();
 const formula = new Formula();
 
 const convertFilter = async (input, next) => {
-    const unit = input.unit;
-    const name = input.name;
-    const esn = input.ESN;
-    var property;
-    await observarionService.sensorProperty(input, next).then((result) => property=result.data)
+  const unit = input.unit;
+  const name = input.name;
+  const esn = input.ESN;
+  var property;
+  await observarionService.sensorProperty(input, next).then((result) => property = result.data)
     .catch(function () {
-      throw new Error("Property does not exist");
+      throw new Error("Sensor with this property does not exist");
     })
-    if(property!=null){
+  if (property != null) {
     input.standarizedUnit = property.unit;
     await formula.transform(input.value, property.unit, input.unit)
       .then((value) => {
@@ -20,7 +20,7 @@ const convertFilter = async (input, next) => {
       }).catch(function () {
         throw new Error("Formula does not exist");
       })
-    }
+  }
 }
 
 module.exports = {

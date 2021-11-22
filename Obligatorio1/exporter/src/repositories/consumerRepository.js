@@ -2,7 +2,7 @@ const Repository = require('./repository');
 const Consumer = require('../models/consumer')
 const md5 = require("md5");
 const jwt = require("jsonwebtoken");
-const crypto = require('crypto');
+require("dotenv").config();
 
 module.exports = class ConsumerRepository {
 
@@ -23,12 +23,12 @@ module.exports = class ConsumerRepository {
   }
 
 
- 
+
   async saveConsumer(data) {
     data.Password = md5(data.Password);
     let existing = await Consumer.findOne({ Email: data.Email });
     if (existing == null) {
-      data.URL = "http://localhost:8080/gateway/exporter/consumer/"+ data.Email;
+      data.URL = "http://localhost:6069/exporter/data/consumer/" + data.Email;
       let consumer = await Consumer.create(data);
       return consumer.toObject();
     } else {
@@ -45,7 +45,7 @@ module.exports = class ConsumerRepository {
     }
   }
 
-  
+
   async findByName(name) {
     try {
       let consumer = await Consumer.findOne({ Name: name });
@@ -56,10 +56,16 @@ module.exports = class ConsumerRepository {
   }
 
   async login(data) {
-    if (data.Password != "" && data.Email != "") {
-      let password = md5(data.Password);
-      let consumer = await Consumer.findOne({Password: password });
-      if (consumer != null) {
+    try {
+      if (data.Password != "" && data.Email != "") {
+        let password = md5(data.Password);
+        var consumer;
+        let consumers = await Consumer.find();
+        consumers.forEach(element => {
+          if (element.Email == data.Email && element.Password == password){
+            consumer = element
+          }
+        });
         const token = jwt.sign(
           {
             Name: consumer.Name,
@@ -69,14 +75,14 @@ module.exports = class ConsumerRepository {
             FechaRegistro: consumer.FechaRegistro,
             Email: consumer.Email
           },
-          process.env.TOKEN_SECRET
+          process.env.JWT_SECRET
         );
         return token;
       } else {
-        throw new Error("Wrong data couldnt log in");
+        throw new Error("Password and email cannot be empty")
       }
-    } else {
-      throw new Error("Fields cant be empty");
+    } catch (error) {
+      throw new Error(error.message);
     }
   }
 
