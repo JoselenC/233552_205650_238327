@@ -55,6 +55,7 @@ module.exports = class AnalyticsController {
     try {
       let data = ctx.request.body;
       let observations = await this.observationsByDate(data)
+      console.log(observations)
       if (observations != null)
         observations.data.sort((a, b) => new Date(a.fechas).getTime() < new Date(b.fechas).getTime());
       else {

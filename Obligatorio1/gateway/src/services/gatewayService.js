@@ -42,29 +42,37 @@ module.exports = class GatewayService {
     });
   }
 
-  async calculateAverageValues(data, criterion) {
+
+  async calculateAverageValues(ctx) {
+    let data = ctx.request.body;
+    let criterion = ctx.params.criterion;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6061/analytics/averages/${criterion}`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
 
-  async saveSensor(data) {
+  async saveSensor(ctx) {    
+    let data = ctx.request.body;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/sensor`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
@@ -90,34 +98,42 @@ module.exports = class GatewayService {
       return axios
         .post(`http://localhost:6065/catalog/property`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
 
   }
 
-  async saveRank(data) {
+  async saveRank(ctx) {    
+    let data = ctx.request.body;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/rank`, data)
         .then((response) => {
+          ctx.body = { data: response.data };
           resolve(response.data);
         })
         .catch((error) => {
+          ctx.body = { data: error.message };
           reject(new Error(error.message));
         });
     });
   }
 
-  async saveObservation(ctx, esn) {
+
+  async saveObservation(ctx) {
+    let data = ctx.request.body;
+    let esn = ctx.params.esn;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
-        .post(`http://localhost:6067/observations/${esn}`, ctx)
+        .post(`http://localhost:6067/observations/${esn}`, data)
         .then((response) => {
           ctx.body = { data: response.data };
           resolve(response.data);

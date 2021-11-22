@@ -21,6 +21,7 @@ module.exports = class AuthenticationController {
         );
       }
     } catch (err) {
+      console.log(err)
       ctx.status = 400;
       ctx.body = { status: 400, message: "Log in to use this function" };
       createLogger.error(

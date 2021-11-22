@@ -38,8 +38,7 @@ module.exports = class GatewayController {
 
   async saveSensor(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveSensor(data)
+      let message = await this.gatewayService.saveSensor(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {
@@ -67,8 +66,7 @@ module.exports = class GatewayController {
 
   async saveRank(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveRank(data)
+      let message = await this.gatewayService.saveRank(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {
@@ -81,9 +79,7 @@ module.exports = class GatewayController {
   }
 
   async saveObservation(ctx, next) {
-      let data = ctx.request.body;
-      let esn = ctx.params.esn;
-      await this.gatewayService.saveObservation(data,esn)    
+      await this.gatewayService.saveObservation(ctx)    
       .then((value) => {
         ctx.body = { data: value }
       }).catch(function (err) {
@@ -97,9 +93,7 @@ module.exports = class GatewayController {
   
   async calculateAverageValues(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let criterion = ctx.params.criterion;
-      let average = await this.gatewayService.calculateAverageValues(data,criterion);
+      let average = await this.gatewayService.calculateAverageValues(ctx);
       ctx.body = average;
       await next();
     } catch (err) {
