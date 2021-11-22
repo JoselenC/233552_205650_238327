@@ -14,6 +14,7 @@ module.exports = class GatewayController {
       let data = ctx.request.body;
       let token = await this.exporterService.login(data);
       ctx.body = { token: token };
+      ctx.set('Authentication', token);
       log.info(`${ctx.request.method} on url ${ctx.request.url}`);
     } catch (err) {
       ctx.status = 400;

@@ -43,6 +43,7 @@ module.exports = class GatewayService {
   }
 
   async calculateAverageValues(data, criterion) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6061/analytics/averages/${criterion}`, data)
@@ -56,6 +57,7 @@ module.exports = class GatewayService {
   }
 
   async saveSensor(data) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/sensor`, data)
@@ -68,8 +70,23 @@ module.exports = class GatewayService {
     });
   }
 
-  async saveProperty(data) {
-    return new Promise(async (resolve, reject) => {
+  async authentication(ctx){
+    return await new Promise(async (resolve, reject) => {
+      return axios
+        .post(`http://localhost:6063/authentication`, ctx)
+        .then((response1) => {
+           resolve(response1)
+        })
+        .catch((error) => {
+          reject(new Error(error.message));
+        });
+    });
+  }
+
+  async saveProperty(ctx) {
+    let data = ctx.request.body;
+    await this.authentication(ctx)
+    return await new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/property`, data)
         .then((response) => {
@@ -79,9 +96,11 @@ module.exports = class GatewayService {
           reject(new Error(error.message));
         });
     });
+
   }
 
   async saveRank(data) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6065/catalog/rank`, data)
@@ -95,6 +114,7 @@ module.exports = class GatewayService {
   }
 
   async saveObservation(ctx, esn) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6067/observations/${esn}`, ctx)
@@ -125,6 +145,7 @@ module.exports = class GatewayService {
   }
 
   async getAllProperties(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/property`, ctx)
@@ -140,6 +161,7 @@ module.exports = class GatewayService {
   }
 
   async getAllSensors(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/sensor`, ctx)
@@ -155,6 +177,7 @@ module.exports = class GatewayService {
   }
 
   async getAllRanks(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6065/catalog/rank`, ctx)
@@ -170,6 +193,7 @@ module.exports = class GatewayService {
   }
 
   async getConsumers(ctx) {
+    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .get(`http://localhost:6069/exporter/consumers/${ctx.params.email}`, ctx)

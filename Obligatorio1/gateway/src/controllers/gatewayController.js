@@ -53,8 +53,7 @@ module.exports = class GatewayController {
 
   async saveProperty(ctx, next) {
     try {
-      let data = ctx.request.body;
-      let message = await this.gatewayService.saveProperty(data)
+      let message = await this.gatewayService.saveProperty(ctx)
       ctx.body = {data: message};
       await next();
     } catch (err) {

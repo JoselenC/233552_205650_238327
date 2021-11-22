@@ -12,15 +12,19 @@ module.exports = class AuthenticationController {
   async authenticate(ctx, next) {
     try {
       let token = ctx.request.body.request.header.authentication;
-      decodeJwt(token, this.secret);
-      createLogger.info(
-        `${ctx.request.method} on url ${ctx.request.url} `
-      );
+      let decode = decodeJwt(token, this.secret);
+      if (decode) {
+        ctx.status = 200;
+        ctx.body = { status: 200, message: decode };
+        createLogger.info(
+          `${ctx.request.method} on url ${ctx.request.url} `
+        );
+      }
     } catch (err) {
       ctx.status = 400;
-      ctx.body = { status: 400, message: err.message };
+      ctx.body = { status: 400, message: "Log in to use this function" };
       createLogger.error(
-        `${ctx.request.method} on url ${ctx.request.url}-> ${err.message}`
+        `${ctx.request.method} on url ${ctx.request.url}-> error ocurred`
       );
     }
   }
