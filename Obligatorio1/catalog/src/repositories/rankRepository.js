@@ -3,7 +3,7 @@ const PropertyObservedRepository = require("./propertyObservedRepository")
 
 module.exports = class RankRepository {
     constructor() {
-        this.propertyObservedRepository= new PropertyObservedRepository()
+        this.propertyObservedRepository = new PropertyObservedRepository()
         this.rankRepository = Repository.Rank;
         this.relations = ['propertiesObserved'];
     }
@@ -29,8 +29,19 @@ module.exports = class RankRepository {
 
     async findByProperty(property) {
         try {
-            let rank = await this.rankRepository.findOne({ Property: property, 
-                include: this.relations });
+            console.log("=========")
+            console.log(property.dataValues)
+            let rank;
+            var query = { include: this.relations };
+            let ranks = await this.rankRepository.findAll(query);
+             ranks.forEach(element => {
+               let properties = element.dataValues.propertiesObserved;
+               properties.forEach(propertyelement => {
+                if (propertyelement.dataValues.name == property.dataValues.name
+                    && propertyelement.dataValues.unit == property.dataValues.unit)
+                    rank = element
+                });
+            });
             return rank;
         } catch (err) {
             return null;
