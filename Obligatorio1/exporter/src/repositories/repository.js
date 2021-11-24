@@ -1,5 +1,7 @@
 const Config = require("config");
 const mongoose = require("mongoose");
+const Consumer = require('../models/consumer')
+const md5 = require("md5");
 
 module.exports = class Repository {
   constructor() {
