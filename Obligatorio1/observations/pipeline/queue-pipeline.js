@@ -25,6 +25,7 @@ class QueuePipeline extends AbstractPipeline {
                             if (err) {
                                 this.emit('error', err);
                                 done(err);
+                                throw new Error(err.message)  
                             } else {
                                 if (next) {
                                     next.add(result, { removeOnComplete: true });

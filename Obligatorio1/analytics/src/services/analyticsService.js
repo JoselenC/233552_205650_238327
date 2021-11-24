@@ -72,7 +72,7 @@ module.exports = class AnalyticsService {
                 });
         });
         if (data.standarizedData > rank.finalValue || data.standarizedData < rank.initialValue) {
-            await this.sendMail(data.name);
+            this.sendMail(data.name);
             return false;
         }
         else {
