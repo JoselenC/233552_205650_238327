@@ -131,7 +131,6 @@ module.exports = class GatewayService {
   async saveObservation(ctx) {
     let data = ctx.request.body;
     let esn = ctx.params.esn;
-    await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6067/observations/${esn}`, data)
