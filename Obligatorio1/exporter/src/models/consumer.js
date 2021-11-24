@@ -13,12 +13,7 @@ const Consumer = mongoose.model(
       match: [/.+\@.+\..+/, 'Enter a valid email']
     },
     Password: { type: String, required: [true, 'Conumer Password is required'] },
-    ObserveFrom: Date,
-    facebook:{
-      id:String,
-      token:String,
-      email:String
-    }
+    ObserveFrom: Date
   }
   )
 );

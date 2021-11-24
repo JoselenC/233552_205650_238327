@@ -64,6 +64,7 @@ module.exports = class GatewayController {
         resolve(result)
       })
       pipeline.on('error', (err) => {
+        
         reject(err)
       });
     })
