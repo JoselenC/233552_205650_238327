@@ -71,8 +71,6 @@ module.exports = class AnalyticsService {
                     reject(new Error(error.message));
                 });
         });
-        console.log(data)
-        console.log(rank)
         if (data.standarizedData > rank.finalValue || data.standarizedData < rank.initialValue) {
             this.sendMail(data.name);
             return false;

@@ -1,16 +1,14 @@
 const Repository = require('../repositories/repository');
-const axios = require("axios");
-const SensorService = require('../../../catalog/src/services/sensorService')
+const Observation = require('../models/observation')
 
 module.exports = class ObservationRepository {
     constructor() {
-        this.observationRepository = Repository.Observation;
-        this.sensorService = new SensorService();
+        this.repository = new Repository();
     }
 
     async findAll() {
         try {
-            let observation = await Repository.Observation.findAll();
+            let observation = await Observation.find();
             return observation;
         }
         catch (err) {
@@ -24,7 +22,7 @@ module.exports = class ObservationRepository {
         try {
             let end = Date.now();
             data.time = parseFloat((end - data.registrationDate) / 1000).toFixed(2);
-            return await this.observationRepository.create(data);
+            return await Observation.create(data);
         }
         catch (err) {
             throw new Error(err.message);
@@ -34,7 +32,7 @@ module.exports = class ObservationRepository {
 
     async findByName(name) {
         try {
-            let observation = await this.observationRepository.findOne({ Name: name });
+            let observation = await Observation.findOne({ Name: name });
             return observation;
         } catch (err) {
             return null;
@@ -47,7 +45,7 @@ module.exports = class ObservationRepository {
             let endDate = ctx.request.body.endDate;
             let propertyObserved = ctx.request.body.propertyObserved;
             let esn = ctx.request.body.sensor.ESN;
-            let observations = await this.observationRepository.findAll()
+            let observations = await Observation.find()
             let filteredObservations = [];
             observations.forEach(element => {
                 if (new Date(element.registrationDate) >= new Date(startDate)
