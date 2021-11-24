@@ -1,27 +1,7 @@
 {
     "repoObservation": {
-        "user": "root",
-        "password": "root",
-        "database": "observationDb",
-        "port": "3306",
-        "options": {
-            "host": "localhost",
-            "dialect": "mysql",
-            "pool": {
-                "max": 10,
-                "min": 0,
-                "acquire": 30000,
-                "idle": 10000
-            }
-        }
-    },
-    "middlewares": {
-        "xmlParser": {
-            "xmlOptions": {
-                "explicitRoot": false,
-                "explicitArray": false
-            }
-        }
+        "url": "mongodb://localhost:27017/observations",
+        "database": "observations"
     },
     "port": 6067,
     "pipeline": {
