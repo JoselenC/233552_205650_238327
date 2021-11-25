@@ -1,0 +1,74 @@
+http://localhost:8080/gateway/exporter/consumer
+{
+    "Name" : "Consumer1",
+    "Proposito" : "Obtener data",
+    "Email":"cosnumer@gmail.com",
+    "Password": "Consumer1234"
+}
+http://localhost:8080/gateway/login
+{    
+    "Password":"Consumer1234",
+    "Email":"cosnumer@gmail.com"
+}
+http://localhost:8080/gateway/catalog/sensor
+{
+    "model" : "A1re",
+    "latitude" : "-34.2625",
+    "longitude" : " -57.4657",
+    "name" : "Sensor de tiempo",
+    "ESN": "AAhgS15",
+    "propertiesObserved":[{
+        "name":"tiempo",
+        "unit":"s"
+    }]
+}
+http://localhost:8080/gateway/catalog/sensor
+  {
+    "model" : "B781zd",
+    "latitude" : "-84.2625",
+    "longitude" : "-97.4657",
+    "name" : "Sensor de tiempo",
+    "ESN": "B781zd",
+    "propertiesObserved":[{
+        "name":"tiempo",
+        "unit":"s"
+    },
+	{
+        "name":"temperatura",
+        "unit":"C"
+    },
+    {
+        "name":"distancia",
+        "unit":"Km"
+    }
+    ]
+  }
+http://localhost:8080/gateway/analytics/person
+{
+    "Name" : "Joselen",
+    "Email":"joselencr@gmail.com"
+}
+http://localhost:8080/gateway/analytics/person
+{
+    "Name" : "Joselen2",
+    "Email":"joselencr2@gmail.com"
+}
+http://localhost:8080/gateway/catalog/rank
+{
+    "initialValue" : 0,
+    "finalValue":5000,
+    "propertiesObserved":[{
+        "name":"tiempo",
+        "unit":"s"
+    }]
+}
+
+http://localhost:8080/gateway/catalog/rank
+{
+    "initialValue" : 0,
+    "finalValue":22009,
+    "propertiesObserved":[{
+        "name":"distancia",
+        "unit":"Km"
+    }]
+}
