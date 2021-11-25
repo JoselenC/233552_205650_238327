@@ -48,8 +48,8 @@ module.exports = class ObservationRepository {
             let observations = await Observation.find()
             let filteredObservations = [];
             observations.forEach(element => {
-                if (new Date(element.registrationDate) >= new Date(startDate)
-                    && new Date(element.registrationDate) <= new Date(endDate)) {
+                if (new Date(element.registrationDate).getTime() >= new Date(startDate).getTime()
+                    && new Date(element.registrationDate).getTime() <= new Date(endDate).getTime()) {
                     if (element.name == propertyObserved.name &&
                         element.standarizedUnit == propertyObserved.unit &&
                         element.ESN == esn) {

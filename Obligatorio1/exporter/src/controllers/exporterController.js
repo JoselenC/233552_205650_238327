@@ -77,7 +77,6 @@ module.exports = class GatewayController {
       let email = ctx.params.email;
       let consumer = await this.exporterService.findByEmail(email);
       ctx.body = { data: consumer };
-      await next();
     } catch (err) {
       ctx.status = 404;
       ctx.body = { status: 404, message: err.message };
