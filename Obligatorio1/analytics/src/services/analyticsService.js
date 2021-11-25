@@ -33,7 +33,6 @@ module.exports = class AnalyticsService {
                     subject: 'Invalid data',
                     text: "Property " + message + " out of range"
                 };
-
                 nodemailer.createTransport({
                     service: "gmail",
                     host: 'smtp.gmail.com ',
@@ -47,7 +46,7 @@ module.exports = class AnalyticsService {
                     if (error) {
                         throw new Error(error.message);
                     } else {
-                        console.log('Email enviado: ' + info.response);
+                        console.log('Email enviado: ' + info.response);              
                     }
                 });
             });
