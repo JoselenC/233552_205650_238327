@@ -1,0 +1,801 @@
+[{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53288"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5328a"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5328b"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5328c"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 256
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5328d"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53290"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 87
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53292"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "h",
+  "value": 66
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53294"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "h",
+  "value": 29
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53295"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53296"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53297"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53298"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "h",
+  "value": 2
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c53299"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "h",
+  "value": 1
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5329b"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "C",
+  "value": 27
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5329c"
+  },
+  "ESN": "B781zd",
+  "name": "distancia",
+  "unit": "m",
+  "value": 220
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c5329f"
+  },
+  "ESN": "B781zd",
+  "name": "distancia",
+  "unit": "m",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532a3"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "h",
+  "value": 1
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532a4"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "k",
+  "value": 255
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532a6"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532a7"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "C",
+  "value": 27
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532a9"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 7
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532aa"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "F",
+  "value": 88
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532ac"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 231
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532ad"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "C",
+  "value": 31
+},{
+  "_id": {
+    "$oid": "619fc28da913f8d074c532b0"
+  },
+  "ESN": "B781zd",
+  "name": "temperatura",
+  "unit": "K",
+  "value": 5
+},{
+  "_id": {
+    "$oid": "619ff692974eb2ad8bad1c0e"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6a2974eb2ad8bad1c10"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff6a5974eb2ad8bad1c11"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff6a7974eb2ad8bad1c12"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff6a9974eb2ad8bad1c13"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff6ac974eb2ad8bad1c14"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6ae974eb2ad8bad1c15"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6b0974eb2ad8bad1c16"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6b2974eb2ad8bad1c17"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6b6974eb2ad8bad1c18"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 256
+},{
+  "_id": {
+    "$oid": "619ff6b8974eb2ad8bad1c19"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 256
+},{
+  "_id": {
+    "$oid": "619ff6ba974eb2ad8bad1c1a"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 256
+},{
+  "_id": {
+    "$oid": "619ff6bd974eb2ad8bad1c1b"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 256
+},{
+  "_id": {
+    "$oid": "619ff6c0974eb2ad8bad1c1c"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619ff6c3974eb2ad8bad1c1d"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619ff6c5974eb2ad8bad1c1e"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619ff6c7974eb2ad8bad1c1f"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "m",
+  "value": 6
+},{
+  "_id": {
+    "$oid": "619ff6ca974eb2ad8bad1c20"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 87
+},{
+  "_id": {
+    "$oid": "619ff6cc974eb2ad8bad1c21"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 87
+},{
+  "_id": {
+    "$oid": "619ff6ce974eb2ad8bad1c22"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 87
+},{
+  "_id": {
+    "$oid": "619ff6d0974eb2ad8bad1c23"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 87
+},{
+  "_id": {
+    "$oid": "619ff6dd974eb2ad8bad1c24"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6df974eb2ad8bad1c25"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6e2974eb2ad8bad1c26"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6e4974eb2ad8bad1c27"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff6e8974eb2ad8bad1c28"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff6e9974eb2ad8bad1c29"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff6ec974eb2ad8bad1c2a"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff6ee974eb2ad8bad1c2b"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff6f9974eb2ad8bad1c2c"
+  },
+  "ESN": "B781zd",
+  "name": "distancia",
+  "unit": "m",
+  "value": 220
+},{
+  "_id": {
+    "$oid": "619ff6fe974eb2ad8bad1c2d"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619ff701974eb2ad8bad1c2e"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619ff705974eb2ad8bad1c2f"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619ff707974eb2ad8bad1c30"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 70
+},{
+  "_id": {
+    "$oid": "619ff73c974eb2ad8bad1c31"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff73f974eb2ad8bad1c32"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff742974eb2ad8bad1c33"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff744974eb2ad8bad1c34"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff746974eb2ad8bad1c35"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff749974eb2ad8bad1c36"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 22
+},{
+  "_id": {
+    "$oid": "619ff74d974eb2ad8bad1c37"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff74f974eb2ad8bad1c38"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff751974eb2ad8bad1c39"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff754974eb2ad8bad1c3a"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff75f974eb2ad8bad1c3b"
+  },
+  "ESN": "B781zd",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 231
+},{
+  "_id": {
+    "$oid": "619ff762974eb2ad8bad1c3c"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff76d974eb2ad8bad1c3d"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff76f974eb2ad8bad1c3e"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff771974eb2ad8bad1c3f"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff773974eb2ad8bad1c40"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff775974eb2ad8bad1c41"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff778974eb2ad8bad1c42"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff77a974eb2ad8bad1c43"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff77d974eb2ad8bad1c44"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff780974eb2ad8bad1c45"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff786974eb2ad8bad1c46"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff788974eb2ad8bad1c47"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 26
+},{
+  "_id": {
+    "$oid": "619ff795974eb2ad8bad1c48"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff797974eb2ad8bad1c49"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff79a974eb2ad8bad1c4a"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff79d974eb2ad8bad1c4b"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7a0974eb2ad8bad1c4c"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7a2974eb2ad8bad1c4d"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7a4974eb2ad8bad1c4e"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7a8974eb2ad8bad1c4f"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7aa974eb2ad8bad1c50"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7ae974eb2ad8bad1c51"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7b0974eb2ad8bad1c52"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7b2974eb2ad8bad1c53"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7b4974eb2ad8bad1c54"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7b7974eb2ad8bad1c55"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7b9974eb2ad8bad1c56"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7bc974eb2ad8bad1c57"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7be974eb2ad8bad1c58"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+},{
+  "_id": {
+    "$oid": "619ff7c0974eb2ad8bad1c59"
+  },
+  "ESN": "AAhgS15",
+  "name": "tiempo",
+  "unit": "s",
+  "value": 45
+}]

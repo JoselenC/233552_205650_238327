@@ -1,0 +1,1260 @@
+{
+	"info": {
+		"_postman_id": "4d6da559-7304-42ed-967f-4bcc9203f7c9",
+		"name": "Sen-Tech obligatorio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Exporter",
+			"item": [
+				{
+					"name": "Add consumer OK",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Consumer1\",\r\n    \"Proposito\" : \"Obtener data\",\r\n    \"Email\":\"cosnumer@gmail.com\",\r\n    \"Password\": \"Consumer1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/exporter/consumer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"exporter",
+								"consumer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add consumer repetido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Consumer2\",\r\n    \"Proposito\" : \"Obtener data\",\r\n    \"Email\":\"cosnumer2\",\r\n    \"Password\": \"Consume21234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/exporter/consumer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"exporter",
+								"consumer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add consumer bad email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Consumer2\",\r\n    \"Proposito\" : \"Obtener data\",\r\n    \"Email\":\"cosnumer2\",\r\n    \"Password\": \"Consume21234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/exporter/consumer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"exporter",
+								"consumer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add consumer falta atributo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Consumer2\",\r\n    \"Propoito\" : \"Obtener data\",\r\n    \"Email\":\"cosnumer2@gmail.com\",\r\n    \"Password\": \"Consume21234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/exporter/consumer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"exporter",
+								"consumer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get consumer by email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gateway/exporter/consumers/cosnumer@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"exporter",
+								"consumers",
+								"cosnumer@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login ok",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"Password\":\"Consumer1234\",\r\n    \"Email\":\"cosnumer@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login consumer not exist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"Password\":\"Consumern1234\",\r\n    \"Email\":\"cosnumer@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:6069/exporter/data/consumer/cosnumer@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6069",
+							"path": [
+								"exporter",
+								"data",
+								"consumer",
+								"cosnumer@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "Add person to notify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Joselen\",\r\n    \"Email\":\"joselencr@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add person to notify repetido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Joselen\",\r\n    \"Email\":\"joselencr@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add person to notify bad email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Joselen\",\r\n    \"Email\":\"joselencr\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add person to notify falta atributo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Joselen\",\r\n    \"Emacil\":\"joselencr@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add person to notify to delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\" : \"Joselen2\",\r\n    \"Email\":\"joselencr2@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete person",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person/joselencr2@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person",
+								"joselencr2@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get person by email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/person/joselencr@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"person",
+								"joselencr@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average days one month",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\" :\"2021-11-15T14:43:14.000Z\",\r\n    \"endDate\":\"2021-11-27T14:43:14.000Z\",\r\n    \"propertyObserved\": {\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"},\r\n    \"sensor\":{\"ESN\":\"AAhgS15\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/averages/days",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"averages",
+								"days"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average days two month",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\" :\"2021-11-15T14:43:14.000Z\",\r\n    \"endDate\":\"2021-12-27T14:43:14.000Z\",\r\n    \"propertyObserved\": {\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"},\r\n    \"sensor\":{\"ESN\":\"AAhgS15\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/averages/days",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"averages",
+								"days"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average days incorrect rank",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\" :\"2021-11-15T14:43:14.000Z\",\r\n    \"endDate\":\"2023-12-27T14:43:14.000Z\",\r\n    \"propertyObserved\": {\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"},\r\n    \"sensor\":{\"ESN\":\"AAhgS15\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/averages/days",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"averages",
+								"days"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average years",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\" :\"2021-11-15T14:43:14.000Z\",\r\n    \"endDate\":\"2022-11-27T14:43:14.000Z\",\r\n    \"propertyObserved\": {\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"},\r\n    \"sensor\":{\"ESN\":\"AAhgS15\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/averages/year",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"averages",
+								"year"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "average months",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startDate\" :\"2021-11-15T14:43:14.000Z\",\r\n    \"endDate\":\"2022-11-27T14:43:14.000Z\",\r\n    \"propertyObserved\": {\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"},\r\n    \"sensor\":{\"ESN\":\"AAhgS15\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/analytics/averages/month",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"analytics",
+								"averages",
+								"month"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "Rank",
+					"item": [
+						{
+							"name": "Add rank OK",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"initialValue\" : 0,\r\n    \"finalValue\":2,\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/rank",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"rank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add rank falta atributo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"initialVaflue\" : 0,\r\n    \"finalValue\":2,\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/rank",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"rank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add rank sin login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"initialVaflue\" : 0,\r\n    \"finalValue\":2,\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/rank",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"rank"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ranks",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/rank",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"rank"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Sensor",
+					"item": [
+						{
+							"name": "Add sensor OK",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\" : \"A1re\",\r\n    \"latitude\" : \"-34.2625\",\r\n    \"longitude\" : \" -57.4657\",\r\n    \"name\" : \"Sensor de tiempo\",\r\n    \"ESN\": \"AAhgS15\",\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/sensor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"sensor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add sensor sin login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\" : \"A1re\",\r\n    \"latitude\" : \"-34.2625\",\r\n    \"longitude\" : \" -57.4657\",\r\n    \"name\" : \"Sensor de tiempo\",\r\n    \"ESN\": \"AAhgS15\",\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/sensor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"sensor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add sensor falta atributo",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\" : \"A1re\",\r\n    \"latitude\" : \"-34.2625\",\r\n    \"longitude\" : \" -57.4657\",\r\n    \"name\" : \"Sensor de tiempo\",\r\n    \"ESnN\": \"AAhgS15\",\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/sensor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"sensor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add sensor repeted ESN",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"model\" : \"A1re\",\r\n    \"latitude\" : \"-34.2625\",\r\n    \"longitude\" : \" -57.4657\",\r\n    \"name\" : \"Sensor de tiempo\",\r\n    \"ESN\": \"AAhgS15\",\r\n    \"propertiesObserved\":[{\r\n        \"name\":\"tiempo\",\r\n        \"unit\":\"s\"\r\n    }]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/sensor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"sensor"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get sensors",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/sensor",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"sensor"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Property observed",
+					"item": [
+						{
+							"name": "Add propertyOK",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\":\"temperatura\",\r\n        \"unit\":\"c\",\r\n        \"sensorId\":1,\r\n        \"rankId\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/property",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"property"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get properties",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authentication",
+										"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTE4MDF9.ozEV8gp3a3xPCDiLqU_QZfKQbsVNroDbxV_586toHM0",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8080/gateway/catalog/property",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"gateway",
+										"catalog",
+										"property"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Observation",
+			"item": [
+				{
+					"name": "save observation misma unit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tiempo\",\r\n    \"unit\": \"s\",\r\n    \"value\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/observation/AAhgS15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observation",
+								"AAhgS15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save observation distinta unit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tiempo\",\r\n    \"unit\": \"m\",\r\n    \"value\" : 22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/observation/AAhgS15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observation",
+								"AAhgS15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save observation bad property",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tiemmpo\",\r\n    \"unit\": \"m\",\r\n    \"value\" : 22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/observation/AAhgS15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observation",
+								"AAhgS15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save observation bad sensor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tiempo\",\r\n    \"unit\": \"m\",\r\n    \"value\" : 22\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/observation/AAhgS15n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observation",
+								"AAhgS15n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save observation esn header",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							},
+							{
+								"key": "esn",
+								"value": "AAhgS15",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"tiempo\",\r\n    \"unit\": \"s\",\r\n    \"value\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/gateway/observation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all observations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authentication",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJOYW1lIjoiQ2hvY2gyZSIsIlVSTCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NjA2OS9leHBvcnRlci9kYXRhL2NvbnN1bWVyL2Nob2NobGVAZ21haWwuY29tIiwiUHJvcG9zaXRvIjoicHJvcG9zaSIsIkVtYWlsIjoiY2hvY2hsZUBnbWFpbC5jb20iLCJpYXQiOjE2Mzc1OTIwOTN9.cNfUdY_WtPk59XDkMUGOo2P7mqdn_MSvwh2VOZoY8h4",
+								"type": "text"
+							},
+							{
+								"key": "esn",
+								"value": "AAhgS15",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/gateway/observations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"gateway",
+								"observations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
