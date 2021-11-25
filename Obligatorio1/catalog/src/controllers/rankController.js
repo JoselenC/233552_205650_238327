@@ -25,7 +25,7 @@ module.exports = class SensorController {
         }
         catch (error) {
             ctx.status = 404;
-            ctx.body = { status: 404, message: `sensor not found` };
+            ctx.body = { status: 404, message: `Invalid rank data` };
         }
     }
 

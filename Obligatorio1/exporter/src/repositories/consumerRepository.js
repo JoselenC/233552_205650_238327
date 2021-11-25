@@ -38,8 +38,7 @@ module.exports = class ConsumerRepository {
 
   async findByEmail(email) {
     try {
-      let consumer = await Consumer.findOne({ Email: email });
-      return consumer ? consumer : null;
+      return await Consumer.findOne({ Email: email });
     } catch (err) {
       return null;
     }
@@ -62,22 +61,28 @@ module.exports = class ConsumerRepository {
         var consumer;
         let consumers = await Consumer.find();
         consumers.forEach(element => {
-          if (element.Email == data.Email && element.Password == password){
+          if (element.Email == data.Email && element.Password == password) {
             consumer = element
           }
+
         });
-        const token = jwt.sign(
-          {
-            Name: consumer.Name,
-            Id: consumer.Id,
-            URL: consumer.URL,
-            Proposito: consumer.Proposito,
-            FechaRegistro: consumer.FechaRegistro,
-            Email: consumer.Email
-          },
-          process.env.JWT_SECRET
-        );
-        return token;
+        if (consumer) {
+          const token = jwt.sign(
+            {
+              Name: consumer.name,
+              Id: consumer.Id,
+              URL: consumer.URL,
+              Proposito: consumer.Proposito,
+              FechaRegistro: consumer.FechaRegistro,
+              Email: consumer.Email
+            },
+            process.env.JWT_SECRET
+          );
+          return token;
+        }
+        else {
+          throw new Error("Consumer not exist")
+        }
       } else {
         throw new Error("Password and email cannot be empty")
       }

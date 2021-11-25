@@ -19,7 +19,7 @@ module.exports = class PropertyObservedRepository {
             let property = await this.propertyObservedRepository.create(data);
             return property;
         } catch (err) {
-            throw new Error(err.message)
+            throw new Error("invalid data")
         }
     }
 

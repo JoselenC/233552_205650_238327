@@ -1,5 +1,18 @@
 const axios = require("axios");
 
+const axiosRetry = require('axios-retry');
+
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: (retryCount) => {
+    console.log(`retry attempt: ${retryCount}`);
+    return retryCount * 2000;
+  },
+  retryCondition: (error) => {
+    return error.response.status === 503;
+  },
+});
+
 
 axios.interceptors.request.use(function (config) {
   return config;
@@ -41,7 +54,7 @@ module.exports = class GatewayService {
         });
     });
   }
-  
+
 
 
   async calculateAverageValues(ctx) {
@@ -62,7 +75,7 @@ module.exports = class GatewayService {
     });
   }
 
-  async saveSensor(ctx) {    
+  async saveSensor(ctx) {
     let data = ctx.request.body;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
@@ -79,12 +92,12 @@ module.exports = class GatewayService {
     });
   }
 
-  async authentication(ctx){
+  async authentication(ctx) {
     return await new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6063/authentication`, ctx)
         .then((response1) => {
-           resolve(response1)
+          resolve(response1)
         })
         .catch((error) => {
           reject(new Error(error.message));
@@ -110,7 +123,7 @@ module.exports = class GatewayService {
 
   }
 
-  async saveRank(ctx) {    
+  async saveRank(ctx) {
     let data = ctx.request.body;
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
@@ -130,7 +143,13 @@ module.exports = class GatewayService {
 
   async saveObservation(ctx) {
     let data = ctx.request.body;
-    let esn = ctx.params.esn;
+    let esn;
+    if (ctx.params.esn != undefined)
+      esn = ctx.params.esn
+    if (ctx.header.esn != undefined)
+      esn = ctx.header.esn;
+    else if (esn == null)
+      throw new Error("Invalid empty esn");
     return new Promise(async (resolve, reject) => {
       return axios
         .post(`http://localhost:6067/observations/${esn}`, data)
@@ -208,7 +227,7 @@ module.exports = class GatewayService {
     });
   }
 
-  async getConsumers(ctx) {
+  async getConsumerByEmail(ctx) {
     await this.authentication(ctx)
     return new Promise(async (resolve, reject) => {
       return axios

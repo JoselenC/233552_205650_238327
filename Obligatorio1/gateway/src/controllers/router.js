@@ -45,7 +45,7 @@ router.get("/gateway/analytics/person/:email", async (ctx, next) =>
 );
 
 router.get("/gateway/exporter/consumers/:email", async (ctx, next) =>
-    await gatewayController.getConsumer(ctx, next)
+    await gatewayController.getConsumerByEmail(ctx, next)
 );
 
 router.post("/gateway/observation", async (ctx, next) => {

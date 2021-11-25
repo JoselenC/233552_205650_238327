@@ -175,9 +175,9 @@ module.exports = class GatewayController {
     }
   }
   
-  async getConsumer(ctx, next) {
+  async getConsumerByEmail(ctx, next) {
     try {
-      let data = await this.gatewayService.getConsumers(ctx);
+      let data = await this.gatewayService.getConsumerByEmail(ctx);
       ctx.body = data;
       await next();
     } catch (err) {

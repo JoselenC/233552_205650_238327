@@ -82,92 +82,79 @@ module.exports = class AnalyticsService {
     }
 
     async calculateDailyAverage(observations, data) {
-        let startDate =  new Date(data.startDate).getTime();
-        let endDate =  new Date(data.endDate).getTime();
+        let startDate = new Date(data.startDate).getTime();
+        let endDate = new Date(data.endDate).getTime();
         let startYear = new Date(startDate).getFullYear();
         let finalYear = new Date(endDate).getFullYear();
         let avergaeDay = [];
-        let countDays = 0;    
+        let countDays = 0;
         if (finalYear - startYear > 1 || finalYear < startYear)
             throw new Error("Incorrect rank")
         for (let i = startDate; i < endDate; i = i + 60 * 60 * 24 * 1000) {
             let count = 0;
             let average = 0;
-            while (countDays < observations.length && 
+            while (countDays < observations.length &&
                 new Date(observations[countDays].registrationDate).getTime() >= i
-                && new Date(observations[countDays].registrationDate).getTime() < i+ 60 * 60 * 24 * 1000) {
+                && new Date(observations[countDays].registrationDate).getTime() < i + 60 * 60 * 24 * 1000) {
                 average += observations[countDays].standarizedData;
                 count++;
                 countDays++
             }
-            let date = new Date(i);
-            avergaeDay.push({ key: date, value: count == 0 ? 0 : average })
+            let date = new Date(i + 60 * 60 * 24 * 1000);
+            avergaeDay.push({ key: date, value: count == 0 ? 0 : average / count })
         }
 
         return avergaeDay;
     }
 
     async calculateMonthlyAverage(observations, data) {
-        let startDate =  new Date(data.startDate).getTime();
-        let endDate =  new Date(data.endDate).getTime();
+        let startDate = new Date(data.startDate).getTime();
+        let endDate = new Date(data.endDate).getTime();
         let startYear = new Date(startDate).getFullYear();
         let finalYear = new Date(endDate).getFullYear();
         let avergaeMonth = [];
-        let countMonths = 0;    
+        let countMonths = 0;
         if (finalYear < startYear)
             throw new Error("Incorrect rank")
-        for (let i = startDate; i < endDate; i = i + 60 * 60 * 24 * 1000*getCoutDays(startDate)) {
+        for (let i = startDate; i < endDate; i = i + 60 * 60 * 24 * 1000 * getCoutDays(startDate)) {
             let count = 0;
             let average = 0;
-            while (countMonths < observations.length && 
+            while (countMonths < observations.length &&
                 new Date(observations[countMonths].registrationDate).getTime() >= i
-                && new Date(observations[countMonths].registrationDate).getTime() < 
-                i+ 60 * 60 * 24 * 1000* getCoutDays(startDate)) {
+                && new Date(observations[countMonths].registrationDate).getTime() <
+                i + 60 * 60 * 24 * 1000 * getCoutDays(startDate)) {
                 average += observations[countMonths].standarizedData;
                 count++;
                 countMonths++
             }
             let date = new Date(i);
-            avergaeMonth.push({ key: date, value: count == 0 ? 0 : average })
+            avergaeMonth.push({ key: date, value: count == 0 ? 0 : average / count })
         }
         return avergaeMonth;
     }
 
     async calculateAnnualAverage(observations, data) {
-        let startDate = data.startDate;
-        let endDate = data.endDate;
+        let startDate = new Date(data.startDate).getTime();
+        let endDate = new Date(data.endDate).getTime();
         let startYear = new Date(startDate).getFullYear();
         let finalYear = new Date(endDate).getFullYear();
-        let count = 0;
-        let countYears = 1;
         let avergaeYear = [];
-        let average = 0;
+        let countYears = 0;
         if (finalYear < startYear)
             throw new Error("Incorrect rank")
-        observations.forEach(element => {
-            avergaeYear.push({ day: count, average: 0 })
-            startYear = startYear + 1
-            countYears = countYears + 1;
-
-            if (new Date(element.registrationDate).getFullYear() == startYear) {
-                average += parseFloat(element.standarizedData);
-                count = count + 1;
-
+        for (let i = startDate; i < endDate; i = i + 60 * 60 * 24 * 1000 * 365) {
+            let count = 0;
+            let average = 0;
+            while (countYears < observations.length &&
+                new Date(observations[countYears].registrationDate).getTime() >= i
+                && new Date(observations[countYears].registrationDate).getTime() <
+                i + 60 * 60 * 24 * 1000 * 365) {
+                average += observations[countYears].standarizedData;
+                count++;
+                countYears++
             }
-            else {
-                avergaeYear.push({ year: countYears, average: average / count })
-                startYear = startYear + 1;
-                countYears = countYears + 1;
-                count = 1;
-                average = 0;
-            }
-        });
-        while (finalYear >= startYear) {
-            avergaeYear.push({ year: countYears, average: average / count })
-            startYear = startYear + 1;
-            countYears = countYears + 1;
-            count = 1;
-            average = 0;
+            let date = new Date(i);
+            avergaeYear.push({ key: date, value: count == 0 ? 0 : average / count })
         }
         return avergaeYear;
     }
@@ -176,5 +163,5 @@ module.exports = class AnalyticsService {
 }
 
 function getCoutDays(date) {
-    return new Date(new Date(date).getFullYear(),new Date(date).getMonth() + 1, 0).getDate();
+    return new Date(new Date(date).getFullYear(), new Date(date).getMonth() + 1, 0).getDate();
 }

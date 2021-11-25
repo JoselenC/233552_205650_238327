@@ -11,11 +11,10 @@ module.exports = class ObservationService {
         let observations = [];
         let allObservations = await this.observationRepository.findAll();
         allObservations.forEach(element => {
-            if (new Date(element.registrationDate).getTime() > new Date(observeFrom).getTime() ){
-                observations.push(element.dataValues)
+            if (new Date(element.registrationDate).getTime() >= new Date(observeFrom).getTime() ){
+                observations.push(element)
             }
-        });
-        console.log(observations)
+        });        
         return observations;
     }
 

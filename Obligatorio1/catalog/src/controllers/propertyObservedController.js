@@ -19,8 +19,8 @@ module.exports = class SensorController {
         if (property) {
             ctx.body = { data: property };
         } else {
-            ctx.status = 500;
-            ctx.body = { status: 500, message: `Invalid property observed data` };
+            ctx.status = 400;
+            ctx.body = { status: 400, message: `Invalid property observed data` };
         }
         await next();
     }
