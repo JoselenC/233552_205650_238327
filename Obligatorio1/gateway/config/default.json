@@ -1,0 +1,6 @@
+{
+    "portGateway":8080,    
+    "server": {
+        "type": "http"
+    }
+}

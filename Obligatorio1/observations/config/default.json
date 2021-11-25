@@ -1,0 +1,15 @@
+{
+    "repoObservation": {
+        "url": "mongodb://localhost:27017/observations",
+        "database": "observations"
+    },
+    "port": 6067,
+    "pipeline": {
+        "pipe": "queue"
+    },
+    "redis": {
+        "port": 6379,
+        "host": "127.0.0.1",
+        "db": 0
+    }
+}
